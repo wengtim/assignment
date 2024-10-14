@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class HomePage {
-   JFrame frame = new JFrame();
+   JFrame frame = new JFrame("Home");
    JLabel welcomeLabel = new JLabel("Welcome Page");
 
    HomePage(String userID) {

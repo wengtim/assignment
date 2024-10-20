@@ -1,0 +1,7 @@
+wengtim:nice
+brocode:anothernice
+raul:notbad
+admin:admin
+newuser:nice
+thisissomethingnew:nice
+anotheruser:nice

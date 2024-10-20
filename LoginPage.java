@@ -1,6 +1,5 @@
 import java.awt.event.ActionListener;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
@@ -60,7 +59,16 @@ public class LoginPage implements ActionListener {
       frame.setSize(420, 420);
       frame.setResizable(false);
       frame.setLayout(null);
+      frame.getContentPane().setBackground(new Color(0xf9f7f0));
       frame.setVisible(true);
+   }
+
+   public static void timesleep(int time) {
+      try {
+         Thread.sleep(time);
+      } catch (InterruptedException e) {
+         e.printStackTrace();
+      }
    }
 
    @Override
@@ -72,9 +80,16 @@ public class LoginPage implements ActionListener {
       }
 
       if (e.getSource() == registerButton) {
+         String username = userIDField.getText();
+         String password = String.valueOf(userPasswordField.getPassword());
+
          if (userIDField.getText().equals("") || String.valueOf(userPasswordField.getPassword()).equals("")) {
             messageLabel.setForeground(Color.red);
-            messageLabel.setText("Please enter UserID and Password");
+            messageLabel.setText("UserID or Password cannot be empty");
+            return;
+         } else if (userIDField.getText().contains(" ")) {
+            messageLabel.setForeground(Color.red);
+            messageLabel.setText("UserID cannot contain spaces");
             return;
          }
 
@@ -85,14 +100,18 @@ public class LoginPage implements ActionListener {
             logininfo.put(userIDField.getText(), String.valueOf(userPasswordField.getPassword()));
             messageLabel.setForeground(Color.green);
             frame.dispose();
-            RegisterPage registerPage = new RegisterPage(logininfo);
+            RegisterPage registerPage = new RegisterPage(logininfo, username, password);
          }
       }
 
       if (e.getSource() == loginButton) {
          if (userIDField.getText().equals("") || String.valueOf(userPasswordField.getPassword()).equals("")) {
             messageLabel.setForeground(Color.red);
-            messageLabel.setText("Please enter UserID and Password");
+            messageLabel.setText("UserID or Password cannot be empty");
+            return;
+         } else if (userIDField.getText().contains(" ")) {
+            messageLabel.setForeground(Color.red);
+            messageLabel.setText("UserID cannot contain spaces");
             return;
          }
 
@@ -102,7 +121,6 @@ public class LoginPage implements ActionListener {
          if (logininfo.containsKey(userID)) {
             if (logininfo.get(userID).equals(password)) {
                messageLabel.setForeground(Color.green);
-               messageLabel.setText("Login Successful");
                frame.dispose();
                HomePage homepage = new HomePage(userID);
             } else {

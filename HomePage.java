@@ -7,8 +7,9 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 
-public class HomePage implements ActionListener{
+public class HomePage implements ActionListener {
 
    public static void timesleep(int time) {
       try {
@@ -24,6 +25,7 @@ public class HomePage implements ActionListener{
    JButton logoutButton = new JButton("Log Out");
 
    public HomePage(String userID) {
+
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(985, 555);
       frame.setResizable(false);

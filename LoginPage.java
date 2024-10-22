@@ -73,6 +73,9 @@ public class LoginPage implements ActionListener {
 
    @Override
    public void actionPerformed(ActionEvent e) {
+      String username = userIDField.getText();
+      String password = String.valueOf(userPasswordField.getPassword());
+
       if (e.getSource() == resetButton) {
          userIDField.setText("");
          userPasswordField.setText("");
@@ -80,24 +83,21 @@ public class LoginPage implements ActionListener {
       }
 
       if (e.getSource() == registerButton) {
-         String username = userIDField.getText();
-         String password = String.valueOf(userPasswordField.getPassword());
-
-         if (userIDField.getText().equals("") || String.valueOf(userPasswordField.getPassword()).equals("")) {
+         if (password.equals("")) {
             messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID or Password cannot be empty");
+            messageLabel.setText("Password cannot be empty");
             return;
-         } else if (userIDField.getText().contains(" ")) {
+         } else if (username.contains(" ") || username.equals("")) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID cannot contain spaces");
             return;
          }
 
-         if (logininfo.containsKey(userIDField.getText())) {
+         if (logininfo.containsKey(username)) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID already exists. Please Login");
          } else {
-            logininfo.put(userIDField.getText(), String.valueOf(userPasswordField.getPassword()));
+            logininfo.put(username, password);
             messageLabel.setForeground(Color.green);
             frame.dispose();
             RegisterPage registerPage = new RegisterPage(logininfo, username, password);
@@ -105,24 +105,21 @@ public class LoginPage implements ActionListener {
       }
 
       if (e.getSource() == loginButton) {
-         if (userIDField.getText().equals("") || String.valueOf(userPasswordField.getPassword()).equals("")) {
+         if (password.equals("")) {
             messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID or Password cannot be empty");
+            messageLabel.setText("Password cannot be empty");
             return;
-         } else if (userIDField.getText().contains(" ")) {
+         } else if (username.contains(" ")) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID cannot contain spaces");
             return;
          }
 
-         String userID = userIDField.getText();
-         String password = String.valueOf(userPasswordField.getPassword());
-
-         if (logininfo.containsKey(userID)) {
-            if (logininfo.get(userID).equals(password)) {
+         if (logininfo.containsKey(username)) {
+            if (logininfo.get(username).equals(password)) {
                messageLabel.setForeground(Color.green);
                frame.dispose();
-               HomePage homepage = new HomePage(userID);
+               HomePage homepage = new HomePage(username);
             } else {
                messageLabel.setForeground(Color.red);
                messageLabel.setText("Wrong Password");

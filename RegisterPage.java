@@ -5,10 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.FileWriter;
 import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterPage {
    HashMap<String, String> logininfo = new HashMap<String, String>();
+
+   Color color = new Color(0xf9f7f0);
 
    JFrame frame = new JFrame("Registeration Status");
    JLabel userLabel = new JLabel("");
@@ -38,7 +39,7 @@ public class RegisterPage {
       frame.setSize(400, 300);
       frame.setLayout(null);
       frame.setResizable(false);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       statusLabel.setBounds(125, 55, 400, 35);
       statusLabel.setFont(new Font(null, Font.PLAIN, 13));

@@ -11,6 +11,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginPage implements ActionListener {
+
+   Color color = new Color(0xf9f7f0);
+
    JFrame frame = new JFrame("Login / Register");
    JButton loginButton = new JButton("Login");
    JButton registerButton = new JButton("Register");
@@ -59,7 +62,7 @@ public class LoginPage implements ActionListener {
       frame.setSize(420, 420);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
       frame.setVisible(true);
    }
 

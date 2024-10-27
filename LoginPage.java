@@ -90,9 +90,15 @@ public class LoginPage implements ActionListener {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("Password cannot be empty");
             return;
+
          } else if (username.contains(" ") || username.equals("")) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID cannot contain spaces");
+            return;
+
+         } else if (username.length() > 10) {
+            messageLabel.setForeground(Color.red);
+            messageLabel.setText("UserID cannot be longer than 10 characters");
             return;
          }
 

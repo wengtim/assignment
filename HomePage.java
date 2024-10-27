@@ -54,7 +54,7 @@ public class HomePage implements ActionListener, ListSelectionListener {
       message.setBounds(200, 0, 400, 35);
       message.setFont(new Font(null, Font.PLAIN, 13));
 
-      loggedInfo.setBounds(825, 500, 233, 21);
+      loggedInfo.setBounds(790, 500, 233, 21);
       loggedInfo.setFont(new Font(null, Font.PLAIN, 13));
       loggedInfo.setText("<html>Logged in as: <span style='color:#57915d;'>" + userID + "</span></html>");
 

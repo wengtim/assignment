@@ -3,10 +3,9 @@ brocode:anothernice
 raul:notbad
 admin:admin
 newuser:nice
-thisissomethingnew:nice
 anotheruser:nice
 jkGAY:nice
-:ndiawdnwa
-json:nice
 thisisaverylongname:nice
 wengtim2:nice
+wengtim5:nice
+wengtim05:nice

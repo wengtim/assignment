@@ -1,7 +1,9 @@
-import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -14,12 +16,12 @@ public class LoginPage implements ActionListener {
 
    Color color = new Color(0xf9f7f0);
 
-   JFrame frame = new JFrame("Login / Register");
+   JFrame frame = new JFrame("Login");
    JButton loginButton = new JButton("Login");
-   JButton registerButton = new JButton("Register");
-   JButton resetButton = new JButton("Reset");
    JTextField userIDField = new JTextField();
    JPasswordField userPasswordField = new JPasswordField();
+   JLabel registerLabel = new JLabel();
+   JLabel infoLabel = new JLabel();
    JLabel userIDLabel = new JLabel("User ID");
    JLabel userPasswordLabel = new JLabel("Password");
    JLabel messageLabel = new JLabel();
@@ -33,34 +35,55 @@ public class LoginPage implements ActionListener {
       userIDLabel.setBounds(50, 100, 75, 25);
       userPasswordLabel.setBounds(50, 150, 75, 25);
 
-      messageLabel.setBounds(85, 250, 1000, 100);
+      messageLabel.setBounds(85, 230, 1000, 100);
       messageLabel.setFont(new Font(null, Font.ITALIC, 15));
 
       userIDField.setBounds(125, 100, 200, 25);
       userPasswordField.setBounds(125, 150, 200, 25);
 
-      loginButton.setBounds(40, 200, 100, 30);
+      loginButton.setBounds(155, 210, 120, 35);
+      loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
       loginButton.addActionListener(this);
       loginButton.setFocusable(false);
-      registerButton.setBounds(165, 200, 100, 30);
-      registerButton.addActionListener(this);
-      registerButton.setFocusable(false);
-      resetButton.setBounds(290, 200, 100, 30);
-      resetButton.addActionListener(this);
-      resetButton.setFocusable(false);
 
-      frame.add(userIDLabel);
-      frame.add(userPasswordLabel);
+      infoLabel.setBounds(80, 310, 255, 50);
+      infoLabel.setText("Does not have an Account? ");
+      infoLabel.setFont(new Font(null, Font.PLAIN, 13));
+
+      registerLabel.setBounds(255, 313, 83, 45);
+      registerLabel.setText("Register here");
+      registerLabel.setForeground(new Color(0x588db8));
+      registerLabel.setFont(new Font(null, Font.ITALIC, 13));
+      registerLabel.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent e) {
+            frame.dispose();
+            RegisterPage registerPage = new RegisterPage(logininfo);
+         }
+
+         @Override
+         public void mouseEntered(MouseEvent e) {
+            registerLabel.setForeground(new Color(0x74bdf7));
+         }
+
+         @Override
+         public void mouseExited(MouseEvent e) {
+            registerLabel.setForeground(new Color(0x588db8));
+         }
+      });
+
       frame.add(userIDField);
       frame.add(userPasswordField);
       frame.add(loginButton);
-      frame.add(registerButton);
-      frame.add(resetButton);
+      frame.add(userIDLabel);
+      frame.add(userPasswordLabel);
+      frame.add(infoLabel);
+      frame.add(registerLabel);
       frame.add(messageLabel);
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(420, 420);
-      frame.setResizable(false);
+      frame.setResizable(true);
       frame.setLayout(null);
       frame.getContentPane().setBackground(color);
       frame.setVisible(true);
@@ -79,46 +102,14 @@ public class LoginPage implements ActionListener {
       String username = userIDField.getText();
       String password = String.valueOf(userPasswordField.getPassword());
 
-      if (e.getSource() == resetButton) {
-         userIDField.setText("");
-         userPasswordField.setText("");
-         messageLabel.setText("");
-      }
-
-      if (e.getSource() == registerButton) {
-         if (password.equals("")) {
-            messageLabel.setForeground(Color.red);
-            messageLabel.setText("Password cannot be empty");
-            return;
-
-         } else if (username.contains(" ") || username.equals("")) {
-            messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID cannot contain spaces");
-            return;
-
-         } else if (username.length() > 10) {
-            messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID cannot be longer than 10 characters");
-            return;
-         }
-
-         if (logininfo.containsKey(username)) {
-            messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID already exists. Please Login");
-         } else {
-            logininfo.put(username, password);
-            messageLabel.setForeground(Color.green);
-            frame.dispose();
-            RegisterPage registerPage = new RegisterPage(logininfo, username, password);
-         }
-      }
-
       if (e.getSource() == loginButton) {
-         if (password.equals("")) {
+         if (username.equals("")) {
             messageLabel.setForeground(Color.red);
-            messageLabel.setText("Password cannot be empty");
+            messageLabel.setText("UserID cannot be empty");
             return;
-         } else if (username.contains(" ")) {
+         }
+
+         else if (username.contains(" ")) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID cannot contain spaces");
             return;
@@ -131,11 +122,11 @@ public class LoginPage implements ActionListener {
                HomePage homepage = new HomePage(username);
             } else {
                messageLabel.setForeground(Color.red);
-               messageLabel.setText("Wrong Password");
+               messageLabel.setText("Invalid Password");
             }
          } else {
             messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID not found. Please Register");
+            messageLabel.setText("UserID not found");
          }
       }
    }

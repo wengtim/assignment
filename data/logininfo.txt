@@ -9,3 +9,4 @@ thisisaverylongname:nice
 wengtim2:nice
 wengtim5:nice
 wengtim05:nice
+newUser:nice

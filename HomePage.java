@@ -10,6 +10,15 @@ import javax.swing.JLabel;
 
 public class HomePage implements ActionListener {
 
+
+   Color color = new Color(0xf9f7f0);
+   Font font = new Font(null, Font.PLAIN, 13);
+
+   JFrame frame = new JFrame("Home");
+   JLabel loggedInfo = new JLabel();
+   JLabel message = new JLabel();
+   JButton logoutButton = new JButton("Log Out");
+
    public static void timesleep(int time) {
       try {
          Thread.sleep(time);
@@ -17,14 +26,6 @@ public class HomePage implements ActionListener {
          e.printStackTrace();
       }
    }
-
-   Color color = new Color(0xf9f7f0);
-
-   JFrame frame = new JFrame("Home");
-   JLabel loggedInfo = new JLabel();
-   JLabel message = new JLabel();
-   JButton logoutButton = new JButton("Log Out");
-
 
    public HomePage(String userID) {
 
@@ -35,10 +36,10 @@ public class HomePage implements ActionListener {
       frame.getContentPane().setBackground(color);
 
       message.setBounds(200, 0, 400, 35);
-      message.setFont(new Font(null, Font.PLAIN, 13));
+      message.setFont(font);
 
-      loggedInfo.setBounds(790, 500, 233, 21);
-      loggedInfo.setFont(new Font(null, Font.PLAIN, 13));
+      loggedInfo.setBounds(10, 500, 233, 21);
+      loggedInfo.setFont(font);
       loggedInfo.setText("<html>Logged in as: <span style='color:#57915d;'>" + userID + "</span></html>");
 
       logoutButton.setBounds(900, 10, 75, 35);

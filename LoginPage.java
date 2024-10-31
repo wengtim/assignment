@@ -102,6 +102,12 @@ public class LoginPage implements ActionListener {
       String username = userIDField.getText();
       String password = String.valueOf(userPasswordField.getPassword());
 
+      if (username.equals("admin") && password.equals("admin")) {
+         frame.dispose();
+         AdminPage adminPage = new AdminPage();
+         return;
+      }
+
       if (e.getSource() == loginButton) {
          if (username.equals("")) {
             messageLabel.setForeground(Color.red);
@@ -119,7 +125,7 @@ public class LoginPage implements ActionListener {
             if (logininfo.get(username).equals(password)) {
                messageLabel.setForeground(Color.green);
                frame.dispose();
-               HomePage homepage = new HomePage(username);
+               HomePage homePage = new HomePage(username);
             } else {
                messageLabel.setForeground(Color.red);
                messageLabel.setText("Invalid Password");

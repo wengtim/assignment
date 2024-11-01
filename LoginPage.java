@@ -102,14 +102,14 @@ public class LoginPage implements ActionListener {
       String username = userIDField.getText();
       String password = String.valueOf(userPasswordField.getPassword());
 
-      if (username.equals("admin") && password.equals("admin")) {
-         frame.dispose();
-         AdminPage adminPage = new AdminPage();
-         return;
-      }
 
       if (e.getSource() == loginButton) {
-         if (username.equals("")) {
+         if (username.equals("admin") && password.equals("admin")) {
+            frame.dispose();
+            AdminPage adminPage = new AdminPage(logininfo);
+            return;
+         }
+         else if (username.equals("")) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID cannot be empty");
             return;
@@ -125,7 +125,7 @@ public class LoginPage implements ActionListener {
             if (logininfo.get(username).equals(password)) {
                messageLabel.setForeground(Color.green);
                frame.dispose();
-               HomePage homePage = new HomePage(username);
+               HomePage homePage = new HomePage(username, logininfo);
             } else {
                messageLabel.setForeground(Color.red);
                messageLabel.setText("Invalid Password");

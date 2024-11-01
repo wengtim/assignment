@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 
 public class HomePage implements ActionListener {
 
-
    Color color = new Color(0xf9f7f0);
    Font font = new Font(null, Font.PLAIN, 13);
 
@@ -19,15 +18,10 @@ public class HomePage implements ActionListener {
    JLabel message = new JLabel();
    JButton logoutButton = new JButton("Log Out");
 
-   public static void timesleep(int time) {
-      try {
-         Thread.sleep(time);
-      } catch (InterruptedException e) {
-         e.printStackTrace();
-      }
-   }
+   HashMap<String, String> loginInfoOriginal;
 
-   public HomePage(String userID) {
+   public HomePage(String userID, HashMap<String, String> loginInfoOriginal) {
+      this.loginInfoOriginal = loginInfoOriginal;
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(985, 555);
@@ -56,9 +50,7 @@ public class HomePage implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       if (e.getSource() == logoutButton) {
          frame.dispose();
-         LoginPage loginPage = new LoginPage(new HashMap<String, String>());
+         new LoginPage(loginInfoOriginal);
       }
    }
-
-
 }

@@ -41,7 +41,9 @@ public class AdminPage implements ActionListener {
 
    HashMap<String, String> logininfo = new HashMap<>();
 
-   public AdminPage() {
+   public AdminPage(HashMap<String, String> loginInfoOriginal) {
+
+      logininfo = loginInfoOriginal;
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(985, 580);
@@ -131,7 +133,7 @@ public class AdminPage implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       if (e.getSource() == logoutMenuItem) {
          frame.dispose();
-         LoginPage loginPage = new LoginPage(new HashMap<String, String>());
+         LoginPage loginPage = new LoginPage(logininfo);
       }
 
       if (e.getSource() == viewMenuItem) {

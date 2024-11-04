@@ -36,6 +36,7 @@ public class RegisterPage implements ActionListener {
    JLabel usernameLabel = new JLabel("Username: ");
    JLabel passwordLabel = new JLabel("Password: ");
    JButton registerButton = new JButton("Register");
+   JButton backButton = new JButton("Back");
    JLabel messageLabel = new JLabel();
 
    JTextField nameField = new JTextField();
@@ -57,10 +58,15 @@ public class RegisterPage implements ActionListener {
       passwordLabel.setBounds(50, 200, 75, 25);
       passwordField.setBounds(125, 200, 200, 25);
 
-      registerButton.setBounds(155, 250, 120, 35);
+      registerButton.setBounds(85, 250, 120, 35);
       registerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
       registerButton.setFocusable(false);
       registerButton.addActionListener(this);
+
+      backButton.setBounds(210, 250, 120, 35);
+      backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+      backButton.setFocusable(false);
+      backButton.addActionListener(this);
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(420, 420);
@@ -75,6 +81,7 @@ public class RegisterPage implements ActionListener {
       frame.add(usernameField);
       frame.add(passwordField);
       frame.add(registerButton);
+      frame.add(backButton);
       frame.add(messageLabel);
 
       frame.setVisible(true);
@@ -85,6 +92,11 @@ public class RegisterPage implements ActionListener {
       String name = nameField.getText();
       String username = usernameField.getText();
       String password = String.valueOf(passwordField.getPassword());
+
+      if (e.getSource() == backButton) {
+         frame.dispose();
+         new LoginPage(logininfo);
+      }
 
       if (e.getSource() == registerButton) {
          if (name.equals("") || name.charAt(0) == ' ') {

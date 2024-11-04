@@ -10,3 +10,4 @@ wengtim2:nice
 wengtim5:nice
 wengtim05:nice
 newUser:nice
+test2:nice

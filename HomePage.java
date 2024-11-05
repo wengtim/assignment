@@ -50,7 +50,7 @@ public class HomePage implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       if (e.getSource() == logoutButton) {
          frame.dispose();
-         new LoginPage(loginInfoOriginal);
+         new StudentLogin(loginInfoOriginal);
       }
    }
 }

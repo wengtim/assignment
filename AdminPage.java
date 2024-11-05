@@ -39,11 +39,11 @@ public class AdminPage implements ActionListener {
    JTable table;
    JScrollPane scrollPane;
 
-   HashMap<String, String> logininfo = new HashMap<>();
+   HashMap<String, String> studentInfo = new HashMap<>();
 
    public AdminPage(HashMap<String, String> loginInfoOriginal) {
 
-      logininfo = loginInfoOriginal;
+      studentInfo = loginInfoOriginal;
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(985, 580);
@@ -109,7 +109,7 @@ public class AdminPage implements ActionListener {
    private Object[][] getData() {
       ArrayList<Object[]> dataList = new ArrayList<>();
 
-      try (BufferedReader reader = new BufferedReader(new FileReader("data/logininfo.txt"))) {
+      try (BufferedReader reader = new BufferedReader(new FileReader("data/studentInfo.txt"))) {
          String line;
          while ((line = reader.readLine()) != null) {
             String[] parts = line.split(":");
@@ -133,7 +133,7 @@ public class AdminPage implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       if (e.getSource() == logoutMenuItem) {
          frame.dispose();
-         LoginPage loginPage = new LoginPage(logininfo);
+         StudentLogin studentLogin = new StudentLogin(studentInfo);
       }
 
       if (e.getSource() == viewMenuItem) {

@@ -2,11 +2,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 
-public class IDandPassword {
+public class StudentData {
 
-   HashMap<String, String> logininfo = new HashMap<String, String>();
+   HashMap<String, String> studentInfo = new HashMap<String, String>();
 
-   public IDandPassword(String filePath) {
+   public StudentData(String filePath) {
       loadLoginInfo(filePath);
    }
 
@@ -18,7 +18,7 @@ public class IDandPassword {
             if (parts.length == 2) {
                String username = parts[0].trim();
                String password = parts[1].trim();
-               logininfo.put(username, password);
+               studentInfo.put(username, password);
             }
          }
       } catch (Exception e) {
@@ -27,6 +27,6 @@ public class IDandPassword {
    }
 
    protected HashMap<String, String> getLoginInfo() {
-      return logininfo;
+      return studentInfo;
    }
 }

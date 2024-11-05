@@ -12,11 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class LoginPage implements ActionListener {
+public class LectureLogin implements ActionListener {
 
    Color color = new Color(0xf9f7f0);
 
-   JFrame frame = new JFrame("Login");
+   JFrame frame = new JFrame("Student Login");
    JButton loginButton = new JButton("Login");
    JTextField userIDField = new JTextField();
    JPasswordField userPasswordField = new JPasswordField();
@@ -26,11 +26,11 @@ public class LoginPage implements ActionListener {
    JLabel userPasswordLabel = new JLabel("Password");
    JLabel messageLabel = new JLabel();
 
-   HashMap<String, String> logininfo = new HashMap<String, String>();
+   HashMap<String, String> lectureInfo = new HashMap<String, String>();
 
-   LoginPage(HashMap<String, String> loginInfoOriginal) {
+   LectureLogin(HashMap<String, String> loginInfoOriginal) {
 
-      logininfo = loginInfoOriginal;
+      lectureInfo = loginInfoOriginal;
 
       userIDLabel.setBounds(50, 100, 75, 25);
       userPasswordLabel.setBounds(50, 150, 75, 25);
@@ -55,10 +55,10 @@ public class LoginPage implements ActionListener {
       registerLabel.setForeground(new Color(0x588db8));
       registerLabel.setFont(new Font(null, Font.ITALIC, 13));
       registerLabel.addMouseListener(new MouseAdapter() {
+
          @Override
          public void mouseClicked(MouseEvent e) {
             frame.dispose();
-            RegisterPage registerPage = new RegisterPage(logininfo);
          }
 
          @Override
@@ -106,7 +106,7 @@ public class LoginPage implements ActionListener {
       if (e.getSource() == loginButton) {
          if (username.equals("admin") && password.equals("admin")) {
             frame.dispose();
-            AdminPage adminPage = new AdminPage(logininfo);
+            AdminPage adminPage = new AdminPage(lectureInfo);
             return;
          }
          else if (username.equals("")) {
@@ -121,11 +121,11 @@ public class LoginPage implements ActionListener {
             return;
          }
 
-         if (logininfo.containsKey(username)) {
-            if (logininfo.get(username).equals(password)) {
+         if (lectureInfo.containsKey(username)) {
+            if (lectureInfo.get(username).equals(password)) {
                messageLabel.setForeground(Color.green);
                frame.dispose();
-               HomePage homePage = new HomePage(username, logininfo);
+               HomePage homePage = new HomePage(username, lectureInfo);
             } else {
                messageLabel.setForeground(Color.red);
                messageLabel.setText("Invalid Password");

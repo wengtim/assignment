@@ -12,3 +12,4 @@ wengtim05:nice
 newUser:nice
 test2:nice
 newestUser:nice
+nice:nice

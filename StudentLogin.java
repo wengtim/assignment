@@ -25,6 +25,7 @@ public class StudentLogin implements ActionListener {
    JLabel userIDLabel = new JLabel("User ID");
    JLabel userPasswordLabel = new JLabel("Password");
    JLabel messageLabel = new JLabel();
+   JButton backButton = new JButton("Back");
 
    HashMap<String, String> studentInfo = new HashMap<String, String>();
 
@@ -41,10 +42,15 @@ public class StudentLogin implements ActionListener {
       userIDField.setBounds(125, 100, 200, 25);
       userPasswordField.setBounds(125, 150, 200, 25);
 
-      loginButton.setBounds(155, 210, 120, 35);
+      loginButton.setBounds(70, 210, 120, 35);
       loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
       loginButton.addActionListener(this);
       loginButton.setFocusable(false);
+
+      backButton.setBounds(200, 210, 120, 35);
+      backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+      backButton.addActionListener(this);
+      backButton.setFocusable(false);
 
       infoLabel.setBounds(80, 310, 255, 50);
       infoLabel.setText("Does not have an Account? ");
@@ -80,6 +86,7 @@ public class StudentLogin implements ActionListener {
       frame.add(infoLabel);
       frame.add(registerLabel);
       frame.add(messageLabel);
+      frame.add(backButton);
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(420, 420);
@@ -102,38 +109,35 @@ public class StudentLogin implements ActionListener {
       String username = userIDField.getText();
       String password = String.valueOf(userPasswordField.getPassword());
 
+      if (e.getSource() == backButton) {
+         frame.dispose();
+         new StartPage();
+      }
 
-      if (e.getSource() == loginButton) {
-         if (username.equals("admin") && password.equals("admin")) {
+      if (username.equals("")) {
+         messageLabel.setForeground(Color.red);
+         messageLabel.setText("UserID cannot be empty");
+         return;
+      }
+
+      else if (username.contains(" ")) {
+         messageLabel.setForeground(Color.red);
+         messageLabel.setText("UserID cannot contain spaces");
+         return;
+      }
+
+      if (studentInfo.containsKey(username)) {
+         if (studentInfo.get(username).equals(password)) {
+            messageLabel.setForeground(Color.green);
             frame.dispose();
-            AdminPage adminPage = new AdminPage(studentInfo);
-            return;
-         }
-         else if (username.equals("")) {
-            messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID cannot be empty");
-            return;
-         }
-
-         else if (username.contains(" ")) {
-            messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID cannot contain spaces");
-            return;
-         }
-
-         if (studentInfo.containsKey(username)) {
-            if (studentInfo.get(username).equals(password)) {
-               messageLabel.setForeground(Color.green);
-               frame.dispose();
-               HomePage homePage = new HomePage(username, studentInfo);
-            } else {
-               messageLabel.setForeground(Color.red);
-               messageLabel.setText("Invalid Password");
-            }
+            StudentPage studentPage = new StudentPage(username, studentInfo);
          } else {
             messageLabel.setForeground(Color.red);
-            messageLabel.setText("UserID not found");
+            messageLabel.setText("Invalid Password");
          }
+      } else {
+         messageLabel.setForeground(Color.red);
+         messageLabel.setText("UserID not found");
       }
    }
 }

@@ -133,7 +133,7 @@ public class AdminPage implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       if (e.getSource() == logoutMenuItem) {
          frame.dispose();
-         StudentLogin studentLogin = new StudentLogin(studentInfo);
+         LectureLogin lectureLogin = new LectureLogin(studentInfo);
       }
 
       if (e.getSource() == viewMenuItem) {

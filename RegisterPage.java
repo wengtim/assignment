@@ -33,7 +33,7 @@ public class RegisterPage implements ActionListener {
    JFrame frame = new JFrame("Register");
 
    JLabel nameLabel = new JLabel("Name: ");
-   JLabel usernameLabel = new JLabel("Username: ");
+   JLabel usernameLabel = new JLabel("UserID: ");
    JLabel passwordLabel = new JLabel("Password: ");
    JButton registerButton = new JButton("Register");
    JButton backButton = new JButton("Back");

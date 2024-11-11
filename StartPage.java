@@ -41,10 +41,10 @@ public class StartPage implements ActionListener {
          StudentLogin studentLogin = new StudentLogin(studentData.getLoginInfo());
       }
 
-      //if (e.getSource() == lecturerButton) {
-      //   frame.dispose();
-      //   Lecturedata lectureData = new LectureData("data/lecturerInfo.txt");
-      //   LectureLogin lectureLogin = new LectureLogin(lectureData.getLoginInfo());
-      //}
+      if (e.getSource() == lecturerButton) {
+         frame.dispose();
+         LectureData lectureData = new LectureData("data/lecturerInfo.txt");
+         LectureLogin lectureLogin = new LectureLogin(lectureData.getLoginInfo());
+      }
    }
 }

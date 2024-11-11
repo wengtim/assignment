@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class HomePage implements ActionListener {
+public class StudentPage implements ActionListener {
 
    Color color = new Color(0xf9f7f0);
    Font font = new Font(null, Font.PLAIN, 13);
@@ -20,7 +20,7 @@ public class HomePage implements ActionListener {
 
    HashMap<String, String> loginInfoOriginal;
 
-   public HomePage(String userID, HashMap<String, String> loginInfoOriginal) {
+   public StudentPage(String userID, HashMap<String, String> loginInfoOriginal) {
       this.loginInfoOriginal = loginInfoOriginal;
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

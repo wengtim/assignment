@@ -13,3 +13,4 @@ newUser:nice
 test2:nice
 newestUser:nice
 nice:nice
+hi:nice

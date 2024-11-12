@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 
@@ -21,6 +23,8 @@ public class LectureLogin implements ActionListener {
    JLabel userIDLabel = new JLabel("User ID");
    JLabel userPasswordLabel = new JLabel("Password");
    JLabel messageLabel = new JLabel();
+   JLabel registerLabel = new JLabel();
+   JLabel infoLabel = new JLabel();
    JButton backButton = new JButton("Back");
 
    HashMap<String, String> lectureInfo = new HashMap<String, String>();
@@ -38,6 +42,32 @@ public class LectureLogin implements ActionListener {
       userIDField.setBounds(125, 100, 200, 25);
       userPasswordField.setBounds(125, 150, 200, 25);
 
+      infoLabel.setBounds(80, 310, 255, 50);
+      infoLabel.setText("Does not have an Account? ");
+      infoLabel.setFont(new Font(null, Font.PLAIN, 13));
+
+      registerLabel.setBounds(255, 313, 83, 45);
+      registerLabel.setText("Register here");
+      registerLabel.setForeground(new Color(0x588db8));
+      registerLabel.setFont(new Font(null, Font.ITALIC, 13));
+      registerLabel.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent e) {
+            frame.dispose();
+            LecRegister lecRegister = new LecRegister(lectureInfo);
+         }
+
+         @Override
+         public void mouseEntered(MouseEvent e) {
+            registerLabel.setForeground(new Color(0x74bdf7));
+         }
+
+         @Override
+         public void mouseExited(MouseEvent e) {
+            registerLabel.setForeground(new Color(0x588db8));
+         }
+      });
+
       loginButton.setBounds(70, 210, 120, 35);
       loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
       loginButton.addActionListener(this);
@@ -48,6 +78,8 @@ public class LectureLogin implements ActionListener {
       backButton.addActionListener(this);
       backButton.setFocusable(false);
 
+      frame.add(infoLabel);
+      frame.add(registerLabel);
       frame.add(userIDField);
       frame.add(userPasswordField);
       frame.add(loginButton);
@@ -87,8 +119,7 @@ public class LectureLogin implements ActionListener {
             frame.dispose();
             AdminPage adminPage = new AdminPage(lectureInfo);
             return;
-         }
-         else if (username.equals("")) {
+         } else if (username.equals("")) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID cannot be empty");
             return;

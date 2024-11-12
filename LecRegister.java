@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.util.HashMap;
 
-public class RegisterPage implements ActionListener {
+public class LecRegister implements ActionListener {
 
    public static void timesleep(int time) {
       try {
@@ -19,7 +19,7 @@ public class RegisterPage implements ActionListener {
 
    public static void writeToFile(String username, String password) {
       try {
-         FileWriter writer = new FileWriter("data/studentInfo.txt", true);
+         FileWriter writer = new FileWriter("data/lecturerInfo.txt", true);
          writer.write(username + ":" + password + "\n");
          writer.close();
       } catch (Exception e) {
@@ -27,10 +27,10 @@ public class RegisterPage implements ActionListener {
       }
    }
 
-   HashMap<String, String> studentInfo = new HashMap<String, String>();
+   HashMap<String, String> lecturerInfo = new HashMap<String, String>();
 
    Color color = new Color(0xf9f7f0);
-   JFrame frame = new JFrame("Register (Student)");
+   JFrame frame = new JFrame("Register (Lecturer)");
 
    JLabel nameLabel = new JLabel("Name: ");
    JLabel usernameLabel = new JLabel("UserID: ");
@@ -43,8 +43,8 @@ public class RegisterPage implements ActionListener {
    JTextField usernameField = new JTextField();
    JPasswordField passwordField = new JPasswordField();
 
-   public RegisterPage(HashMap<String, String> loginInfoOriginal) {
-      studentInfo = loginInfoOriginal;
+   public LecRegister(HashMap<String, String> loginInfoOriginal) {
+      lecturerInfo = loginInfoOriginal;
 
       messageLabel.setBounds(75, 255, 1000, 100);
       messageLabel.setFont(new Font(null, Font.BOLD, 15));
@@ -95,7 +95,7 @@ public class RegisterPage implements ActionListener {
 
       if (e.getSource() == backButton) {
          frame.dispose();
-         new StudentLogin(studentInfo);
+         new LectureLogin(lecturerInfo);
       }
 
       if (e.getSource() == registerButton) {
@@ -135,24 +135,24 @@ public class RegisterPage implements ActionListener {
             return;
          }
 
-         else if (studentInfo.containsKey(username)) {
+         else if (lecturerInfo.containsKey(username)) {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("UserID already exists");
             return;
          }
 
          else {
-            if (studentInfo.containsKey(username)) {
+            if (lecturerInfo.containsKey(username)) {
                messageLabel.setForeground(Color.red);
                messageLabel.setText("UserID already exists");
                return;
             }
 
-            studentInfo.put(username, password);
+            lecturerInfo.put(username, password);
             writeToFile(username, password);
             JOptionPane.showMessageDialog(frame, "Successfully Registered");
             frame.dispose();
-            StudentLogin studentLogin = new StudentLogin(studentInfo);
+            LectureLogin lectureLogin = new LectureLogin(lecturerInfo);
          }
       }
    }

@@ -13,7 +13,7 @@ public class LecturerPage implements ActionListener {
    Color color = new Color(0xf9f7f0);
    Font font = new Font(null, Font.PLAIN, 13);
 
-   JFrame frame = new JFrame("Home");
+   JFrame frame = new JFrame("Home (Lecturer)");
    JLabel loggedInfo = new JLabel();
    JLabel message = new JLabel();
    JButton logoutButton = new JButton("Log Out");

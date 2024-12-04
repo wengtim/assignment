@@ -117,6 +117,8 @@ public class StudentLogin implements ActionListener {
       String name = readFile(username);
 
       if (e.getSource() == backButton) {
+         userIDField.setText("");
+         userPasswordField.setText("");
          frame.dispose();
          new StartPage();
       }

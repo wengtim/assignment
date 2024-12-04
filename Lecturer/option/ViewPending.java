@@ -83,14 +83,15 @@ public class ViewPending {
          String line;
          while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
-            if (data.length == 7 && data[2].equals(lecID)) {
+            if (data.length == 8 && data[2].equals(lecID)) {
                String bookingID = data[0];
                String userID = data[1];
                String lecturerID = data[2];
-               String date = data[3];
-               String startTime = data[4];
-               String endTime = data[5];
-               String status = data[6];
+               String day = data[3];
+               String date = data[4];
+               String startTime = data[5];
+               String endTime = data[6];
+               String status = data[7];
                String studentName = getStudentName(userID);
 
                JPanel showBooking = showBookingDetails(bookingID, userID, studentName, lecturerID, date, startTime, endTime, status, lecID);
@@ -189,7 +190,7 @@ public class ViewPending {
       rejectButton.setBackground(new Color(0xfce1c5));
       rejectButton.addActionListener(e -> {
          rejectsBooking.rejectBooking(filePath, bookingID);
-         JOptionPane.showMessageDialog(null, bookingID + "Booking has been rejected", "Success", JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(frame, "Booking has been rejected", "Success", JOptionPane.INFORMATION_MESSAGE);
          refreshBookingPage(lecID);
       });
 
@@ -200,7 +201,7 @@ public class ViewPending {
       acceptButton.setBackground(new Color(0xfce1c5));
       acceptButton.addActionListener(e -> {
          acceptBooking.acceptBooking(filePath, bookingID);
-         JOptionPane.showMessageDialog(null, bookingID + "Booking has been accepted", "Success", JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(frame, "Booking has been accepted", "Success", JOptionPane.INFORMATION_MESSAGE);
          refreshBookingPage(lecID);
       });
 

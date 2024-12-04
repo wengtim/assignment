@@ -198,13 +198,9 @@ public class ManageTime {
       } else {
          addButton.setVisible(true);
       }
+      addButton.setBounds(0, 0, 100, 45);
 
-      buttonPanel.add(Box.createVerticalGlue());
-      buttonPanel.add(addButton);
-      buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-      buttonPanel.add(editButton);
-      buttonPanel.add(Box.createVerticalGlue());
-
+      frame.add(addButton);
       panel.add(buttonPanel, BorderLayout.EAST);
 
       return panel;

@@ -14,6 +14,7 @@ import com.github.lgooddatepicker.components.*;
 
 public class Booking {
 
+   private boolean isRemoved = false;
    private boolean isHovered = false;
    private boolean hasBooking = false;
 
@@ -110,8 +111,7 @@ public class Booking {
 
       if (!hasBooking) {
          JLabel noAvailableTimeLabel = new JLabel("No Available Time");
-         noAvailableTimeLabel.setFont(new Font("Poppins", Font.BOLD, 18));
-         noAvailableTimeLabel.setForeground(Color.GRAY);
+         noAvailableTimeLabel.setFont(new Font("Poppins", Font.BOLD, 23));
          noAvailableTimeLabel.setHorizontalAlignment(SwingConstants.CENTER);
          contentPanel.add(noAvailableTimeLabel);
       }
@@ -168,11 +168,12 @@ public class Booking {
             try {
                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                LocalDate selectedDate = LocalDate.parse(date, dateFormatter);
+               String selectedDay = day;
                LocalTime selectedStartTime = LocalTime.parse(startTime);
                LocalTime selectedEndTime = LocalTime.parse(endTime);
 
-               writeToFile(userID, lecID, selectedDate, selectedStartTime, selectedEndTime);
-               hideBooking(panel);
+               writeToFile(userID, lecID, selectedDay, selectedDate, selectedStartTime, selectedEndTime);
+               updateBooking(lecID, day, date, startTime, endTime);
                JOptionPane.showMessageDialog(frame, "Your request has been sent", "Success", JOptionPane.INFORMATION_MESSAGE);
                frame.dispose();
                new ConsultationPage(lecName, userID, loginInfoOriginal);
@@ -186,10 +187,29 @@ public class Booking {
       return panel;
    }
 
-   private void hideBooking(JPanel bookingPanel) {
-      contentPanel.remove(bookingPanel);
-      contentPanel.revalidate();
-      contentPanel.repaint();
+   private void updateBooking(String lecID, String day, String date, String startTime, String endTime) {
+      File filePath = new File("data/booking/availability.txt");
+      File tempFile = new File("data/booking/tempAvailability.txt");
+
+      try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+         String line;
+         while((line = reader.readLine()) != null) {
+            if (!line.contains(date)){
+               writer.write(line);
+               writer.newLine();
+            }
+         }
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      if (filePath.delete()) {
+         tempFile.renameTo(filePath);
+      } else {
+         System.out.println("Failed to delete file: " + filePath.getAbsolutePath());
+      }
    }
 
    private String getLecName(String lecID) {
@@ -218,10 +238,11 @@ public class Booking {
       }
    }
 
-   private void writeToFile(String userID, String lecID, LocalDate selectedDate, LocalTime selectedStartTime, LocalTime selectedEndTime) {
-      String fileName = "data/booking/pending/bookingDetails.txt";
+   private void writeToFile(String userID, String lecID, String selectedDay, LocalDate selectedDate, LocalTime selectedStartTime, LocalTime selectedEndTime) {
 
+      String fileName = "data/booking/pending/bookingDetails.txt";
       int newId = 1;
+
       try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
          String lastLine = null, line;
          while ((line = reader.readLine()) != null) {
@@ -238,7 +259,7 @@ public class Booking {
       }
 
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-         writer.write(newId + "," + userID + "," + lecID + "," + selectedDate + "," + selectedStartTime + "," + selectedEndTime + "," + "Pending" + "\n");
+         writer.write(newId + "," + userID + "," + lecID + "," + selectedDay + "," + selectedDate + "," + selectedStartTime + "," + selectedEndTime + "," + "Pending" + "\n");
       } catch (IOException e) {
          e.printStackTrace();
       }

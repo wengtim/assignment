@@ -123,6 +123,7 @@ public class AddTime implements ActionListener {
       frame.add(endLabel);
       frame.add(endTimePicker);
       frame.add(submitButton);
+      frame.add(backPanel);
       frame.setVisible(true);
    }
 
@@ -139,9 +140,9 @@ public class AddTime implements ActionListener {
 
       String day = selectedDate.getDayOfWeek().toString().toLowerCase();
       day = day.substring(0,1).toUpperCase() + day.substring(1).toLowerCase();
-      String formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-      String formattedStartTime = startTime.format(DateTimeFormatter.ofPattern("HHmm"));
-      String formattedEndTime = endTime.format(DateTimeFormatter.ofPattern("HHmm"));
+      String formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+      String formattedStartTime = startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+      String formattedEndTime = endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 
       String lineToWrite = lecID + "," + day + "," + formattedDate + "," + formattedStartTime + "," + formattedEndTime;
 

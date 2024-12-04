@@ -1,6 +1,7 @@
 package Students;
 
 import Students.Consultation.ConsultationPage;
+import Students.Schedule.SchedulePage;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -200,7 +201,8 @@ public class StudentPage implements ActionListener {
       schedulePanel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            System.out.println("Schedule...");
+            frame.dispose();
+            SchedulePage schedulePage = new SchedulePage(name, userID, loginInfoOriginal);
          }
 
          public void mouseEntered(MouseEvent e) {

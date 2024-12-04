@@ -40,6 +40,7 @@ public class LecturerPage {
             Graphics2D g2d = (Graphics2D) g;
 
             ImageIcon image = new ImageIcon("image/logoutButton.png");
+
             if (isHovered) {
                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
             }

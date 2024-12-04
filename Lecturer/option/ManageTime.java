@@ -56,6 +56,7 @@ public class ManageTime {
       backPanel.setBounds(10, 10, 75, 35);
       backPanel.setOpaque(false);
       backPanel.setFocusable(false);
+      backPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       backPanel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
@@ -115,6 +116,7 @@ public class ManageTime {
       JScrollPane scrollPane = new JScrollPane(contentPanel);
       scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
       scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+      scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
       mainPanel.add(scrollPane);
 
@@ -174,6 +176,7 @@ public class ManageTime {
       JButton editButton = new JButton("Edit");
       editButton.setVisible(false);
       editButton.setFocusable(false);
+      editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       editButton.setPreferredSize(new Dimension(100, 45));
       editButton.setFont(new Font("Poppins", Font.BOLD, 14));
       editButton.setBackground(new Color(0xfce1c5));
@@ -185,6 +188,7 @@ public class ManageTime {
       JButton addButton = new JButton("Add");
       addButton.setVisible(true);
       addButton.setFocusable(false);
+      addButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       addButton.setPreferredSize(new Dimension(100, 45));
       addButton.setFont(new Font("Poppins", Font.BOLD, 14));
       addButton.setBackground(new Color(0xfce1c5));
@@ -198,10 +202,12 @@ public class ManageTime {
       } else {
          addButton.setVisible(true);
       }
-      addButton.setBounds(0, 0, 100, 45);
+      addButton.setBounds(810, 10, 90, 35);
 
+      //buttonPanel.add(editButton);
+      //panel.add(buttonPanel, BorderLayout.EAST);
+      panel.add(editButton, BorderLayout.EAST);
       frame.add(addButton);
-      panel.add(buttonPanel, BorderLayout.EAST);
 
       return panel;
    }

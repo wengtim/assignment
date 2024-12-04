@@ -36,7 +36,7 @@ public class AddTime implements ActionListener {
       this.loginInfoOriginal = loginInfoOriginal;
 
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      frame.setSize(985, 555);
+      frame.setSize(500, 400);
       frame.setResizable(false);
       frame.setLayout(null);
       frame.getContentPane().setBackground(new Color(0xf9f7f0));
@@ -78,7 +78,7 @@ public class AddTime implements ActionListener {
       });
 
       JLabel dateLabel = new JLabel("Date: ");
-      dateLabel.setBounds(160, 15, 100, 100);
+      dateLabel.setBounds(130, 35, 100, 100);
       dateLabel.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
 
       datePicker = new DatePicker();
@@ -86,11 +86,11 @@ public class AddTime implements ActionListener {
       datePicker.setOpaque(false);
       datePicker.setBackground(new Color(0xf9f7f0));
       datePicker.setFocusable(false);
-      datePicker.setBounds(240, 53, 230, 30);
+      datePicker.setBounds(210, 73, 230, 30);
 
 
       JLabel startLabel = new JLabel("Start Time: ");
-      startLabel.setBounds(105, 120, 150, 30);
+      startLabel.setBounds(75, 140, 150, 30);
       startLabel.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
 
       startTimePicker = new TimePicker();
@@ -98,10 +98,10 @@ public class AddTime implements ActionListener {
       startTimePicker.setBackground(new Color(0xf9f7f0));
       startTimePicker.getComponentTimeTextField().setFont(font);
       startTimePicker.setFocusable(false);
-      startTimePicker.setBounds(240, 123, 225, 30);
+      startTimePicker.setBounds(210, 143, 225, 30);
 
       JLabel endLabel = new JLabel("End Time: ");
-      endLabel.setBounds(113, 180, 150, 30);
+      endLabel.setBounds(83, 200, 150, 30);
       endLabel.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
 
       endTimePicker = new TimePicker();
@@ -109,11 +109,12 @@ public class AddTime implements ActionListener {
       endTimePicker.setBackground(new Color(0xf9f7f0));
       endTimePicker.getComponentTimeTextField().setFont(font);
       endTimePicker.setFocusable(false);
-      endTimePicker.setBounds(240, 183, 225, 30);
+      endTimePicker.setBounds(210, 203, 225, 30);
 
       JButton submitButton = new JButton("Submit");
-      submitButton.setBounds(200, 250, 150, 30);
+      submitButton.setBounds(200, 270, 150, 50);
       submitButton.setFont(font);
+      submitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       submitButton.addActionListener(this);
 
       frame.add(dateLabel);

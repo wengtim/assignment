@@ -51,6 +51,7 @@ public class ViewPending {
       backPanel.setBounds(10, 10, 75, 35);
       backPanel.setOpaque(false);
       backPanel.setFocusable(false);
+      backPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       backPanel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
@@ -186,6 +187,7 @@ public class ViewPending {
       JButton rejectButton = new JButton("Reject");
       rejectButton.setFocusable(false);
       rejectButton.setPreferredSize(new Dimension(100, 45));
+      rejectButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       rejectButton.setFont(new Font("Poppins", Font.BOLD, 14));
       rejectButton.setBackground(new Color(0xfce1c5));
       rejectButton.addActionListener(e -> {
@@ -197,6 +199,7 @@ public class ViewPending {
       JButton acceptButton = new JButton("Accept");
       acceptButton.setFocusable(false);
       acceptButton.setPreferredSize(new Dimension(100, 45));
+      acceptButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       acceptButton.setFont(new Font("Poppins", Font.BOLD, 14));
       acceptButton.setBackground(new Color(0xfce1c5));
       acceptButton.addActionListener(e -> {
@@ -226,14 +229,20 @@ public class ViewPending {
             String line;
             while ((line = reader.readLine()) != null) {
                String[] data = line.split(",");
-               if (data.length == 7 && data[2].equals(lecID)) {
+               if (data.length != 8) {
+                  System.err.println("Invalid data line: " + line);
+                  continue;
+               }
+
+               if (data[2].equals(lecID)) {
                   String bookingID = data[0];
                   String userID = data[1];
                   String lecturerID = data[2];
-                  String date = data[3];
-                  String startTime = data[4];
-                  String endTime = data[5];
-                  String status = data[6];
+                  String day = data[3];
+                  String date = data[4];
+                  String startTime = data[5];
+                  String endTime = data[6];
+                  String status = data[7];
                   String studentName = getStudentName(userID);
 
                   JPanel showBooking = showBookingDetails(bookingID, userID, studentName, lecturerID, date, startTime, endTime, status, lecID);
@@ -250,17 +259,13 @@ public class ViewPending {
                contentPanel.add(noBookingLabel);
             }
 
-            contentPanel.revalidate();
-            contentPanel.repaint();
-
             JScrollPane scrollPane = findScrollPane(contentPanel);
             if (scrollPane != null) {
                scrollPane.revalidate();
                scrollPane.repaint();
             }
-
          } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(contentPanel, "Error reading booking file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
          }
       });
    }

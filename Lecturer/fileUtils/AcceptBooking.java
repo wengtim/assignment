@@ -4,27 +4,27 @@ import java.io.*;
 import java.util.*;
 
 public class AcceptBooking {
-   String rejectedFile = "data/booking/rejected/rejected.txt";
+   String acceptedBooking = "data/booking/accepted/accepted.txt";
    String availabilityFile = "data/booking/availability.txt";
 
    public void acceptBooking(String filePath, String bookingID) {
       File tempFile = new File("data/booking/pending/tempBookingDetails.txt");
       File originalFile = new File(filePath);
-      File rejectedBookings = new File(rejectedFile);
+      File acceptedBookings = new File(acceptedBooking);
       File availability = new File(availabilityFile);
 
       try (
       BufferedReader reader = new BufferedReader(new FileReader(originalFile));
       BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, true));
-      BufferedWriter rejectedWriter = new BufferedWriter(new FileWriter(rejectedBookings, true));
+      BufferedWriter acceptedWriter = new BufferedWriter(new FileWriter(acceptedBookings, true));
       BufferedWriter availabilityWriter = new BufferedWriter(new FileWriter(availability, true))
    ) {
          String line;
          while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             if (data[0].equals(bookingID)) {
-               rejectedWriter.write(line);
-               rejectedWriter.newLine();
+               acceptedWriter.write(line);
+               acceptedWriter.newLine();
                if (data.length >= 8) {
                   String lecID = data[2];
                   String day = data[3];

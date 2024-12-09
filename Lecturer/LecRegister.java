@@ -31,7 +31,7 @@ public class LecRegister implements ActionListener {
 
    HashMap<String, String> lecturerInfo = new HashMap<String, String>();
 
-   Color color = new Color(0xf9f7f0);
+   Color color = new Color(0xB3EBF2);
    JFrame frame = new JFrame("Register (Lecturer)");
 
    JLabel nameLabel = new JLabel("Name: ");

@@ -23,6 +23,7 @@ public class ConsultationPage implements ActionListener {
    JFrame frame = new JFrame("Consultation Page");
    JLabel loggedInfo = new JLabel();
    Font font = new Font(null, Font.PLAIN, 13);
+   Color color = new Color(0xB3EBF2);
 
    public ConsultationPage(String name, String userID, HashMap<String, String> loginInfoOriginal) {
 
@@ -33,7 +34,7 @@ public class ConsultationPage implements ActionListener {
       frame.setSize(985, 555);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       loggedInfo.setBounds(10, 500, 233, 21);
       loggedInfo.setFont(font);
@@ -81,7 +82,7 @@ public class ConsultationPage implements ActionListener {
 
       JPanel contentPanel = new JPanel();
       contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-      contentPanel.setBackground(new Color(0xf9f7f0));
+      contentPanel.setBackground(color);
 
       try {
          BufferedReader reader = new BufferedReader(new FileReader("data/credentials/lecturerInfo.txt"));
@@ -118,7 +119,7 @@ public class ConsultationPage implements ActionListener {
       panel.setPreferredSize(new Dimension(750, 100));
       panel.setMaximumSize(new Dimension(750, 100));
       panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-      panel.setBackground(new Color(0xf9f7f0));
+      panel.setBackground(color);
 
       JLabel iconLabel = new JLabel(new ImageIcon(
             new ImageIcon("image/person.png")
@@ -130,7 +131,7 @@ public class ConsultationPage implements ActionListener {
 
       JPanel detailsPanel = new JPanel();
       detailsPanel.setLayout(new GridLayout(2, 1));
-      detailsPanel.setBackground(new Color(0xf9f7f0));
+      detailsPanel.setBackground(color);
       JLabel nameLabel = new JLabel("<html>Lecturer Name: <span style='color:#636261;'>" + lecName + "</span></html>");
       nameLabel.setFont(new Font("Poppins", Font.BOLD, 17));
       JLabel statusLabel = new JLabel("<html>Status: <span style='color:#57915d;'>" + status + "</span></html>");
@@ -143,7 +144,7 @@ public class ConsultationPage implements ActionListener {
       bookButton.setFocusable(false);
       bookButton.setPreferredSize(new Dimension(100, 25));
       bookButton.setFont(new Font("Poppins", Font.BOLD, 14));
-      bookButton.setBackground(new Color(0xfce1c5));
+      bookButton.setBackground(color);
       bookButton.addActionListener(e -> {
          frame.dispose();
          new Booking(lecName, lecID,  userID,  loginInfoOriginal);

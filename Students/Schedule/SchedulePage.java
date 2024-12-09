@@ -13,6 +13,7 @@ public class SchedulePage {
    private boolean isHovered = false;
    private boolean hasBooking = false;
 
+   Color color = new Color(0xB3EBF2);
    String userID;
    String studentName;
 
@@ -34,7 +35,7 @@ public class SchedulePage {
       frame.setSize(985, 555);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       loggedInfo.setBounds(10, 500, 233, 21);
       loggedInfo.setFont(font);
@@ -82,7 +83,7 @@ public class SchedulePage {
 
       JPanel contentPanel = new JPanel();
       contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-      contentPanel.setBackground(new Color(0xf9f7f0));
+      contentPanel.setBackground(color);
 
       try {
          BufferedReader reader = new BufferedReader(new FileReader("data/booking/accepted/accepted.txt"));
@@ -160,11 +161,11 @@ public class SchedulePage {
       panel.setPreferredSize(new Dimension(750, 100));
       panel.setMaximumSize(new Dimension(750, 100));
       panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-      panel.setBackground(new Color(0xf9f7f0));
+      panel.setBackground(color);
 
       JPanel detailsPanel = new JPanel();
       detailsPanel.setLayout(new GridLayout(2, 1));
-      detailsPanel.setBackground(new Color(0xf9f7f0));
+      detailsPanel.setBackground(color);
 
       JLabel lecturerName = new JLabel("<html>Lecturer Name: <span style='color:#636261;'>" + lecName + "</span></html>");
       lecturerName.setFont(new Font("Poppins", Font.BOLD, 17));
@@ -186,14 +187,14 @@ public class SchedulePage {
 
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-      buttonPanel.setBackground(new Color(0xf9f7f0));
+      buttonPanel.setBackground(color);
       buttonPanel.setPreferredSize(new Dimension(100, 100));
 
       JButton rescheduleBut = new JButton("Reschedule");
       rescheduleBut.setFocusable(false);
       rescheduleBut.setPreferredSize(new Dimension(100, 45));
       rescheduleBut.setFont(new Font("Poppins", Font.BOLD, 14));
-      rescheduleBut.setBackground(new Color(0xfce1c5));
+      rescheduleBut.setBackground(color);
       rescheduleBut.addActionListener(e -> {
          rescheduleBooking(bookingID, userID, lecID, day, date);
       });
@@ -207,7 +208,7 @@ public class SchedulePage {
       } else {
          JPanel emptyPanel = new JPanel();
          emptyPanel.setLayout(new BoxLayout(emptyPanel, BoxLayout.Y_AXIS));
-         emptyPanel.setBackground(new Color(0xf9f7f0));
+         emptyPanel.setBackground(color);
          emptyPanel.setPreferredSize(new Dimension(100, 100));
 
          panel.add(emptyPanel, BorderLayout.EAST);
@@ -239,11 +240,11 @@ public class SchedulePage {
                   panel.setPreferredSize(new Dimension(750, 100));
                   panel.setMaximumSize(new Dimension(750, 100));
                   panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-                  panel.setBackground(new Color(0xf9f7f0));
+                  panel.setBackground(color);
 
                   JPanel detailsPanel = new JPanel();
                   detailsPanel.setLayout(new GridLayout(2, 1));
-                  detailsPanel.setBackground(new Color(0xf9f7f0));
+                  detailsPanel.setBackground(color);
 
                   JLabel lecturerName = new JLabel("<html>Lecturer Name: <span style='color:#636261;'>" + lecName + "</span></html>");
                   lecturerName.setFont(new Font("Poppins", Font.BOLD, 17));
@@ -265,7 +266,7 @@ public class SchedulePage {
 
                   JPanel buttonPanel = new JPanel();
                   buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-                  buttonPanel.setBackground(new Color(0xf9f7f0));
+                  buttonPanel.setBackground(color);
                   buttonPanel.setPreferredSize(new Dimension(100, 100));
 
                   JButton cancelButton = new JButton("Cancel");

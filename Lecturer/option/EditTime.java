@@ -13,6 +13,7 @@ import java.awt.event.*;
 public class EditTime {
    private boolean isHovered = false;
 
+   Color color = new Color(0xB3EBF2);
    JFrame frame = new JFrame("Edit Time Slots");
 
    JLabel dateLabel = new JLabel("Date: ");
@@ -34,7 +35,7 @@ public class EditTime {
       frame.setSize(500, 400);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       JPanel backPanel = new JPanel() {
          @Override

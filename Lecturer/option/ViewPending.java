@@ -13,6 +13,7 @@ public class ViewPending {
    private boolean isHovered = false;
    private boolean hasBookings = false;
 
+   Color color = new Color(0xB3EBF2);
    String filePath = "data/booking/pending/bookingDetails.txt";
    JFrame frame = new JFrame("Bookings Pending");
    JLabel loggedInfo = new JLabel();
@@ -29,7 +30,7 @@ public class ViewPending {
       frame.setSize(985, 555);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       loggedInfo.setBounds(10, 500, 233, 21);
       loggedInfo.setFont(font);
@@ -77,7 +78,7 @@ public class ViewPending {
       mainPanel.setBounds(100, 50, 800, 430);
 
       contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-      contentPanel.setBackground(new Color(0xf9f7f0));
+      contentPanel.setBackground(color);
 
       try {
          BufferedReader reader = new BufferedReader(new FileReader("data/booking/pending/bookingDetails.txt"));
@@ -147,7 +148,7 @@ public class ViewPending {
       panel.setPreferredSize(new Dimension(750, 100));
       panel.setMaximumSize(new Dimension(750, 100));
       panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-      panel.setBackground(new Color(0xf9f7f0));
+      panel.setBackground(color);
 
       JLabel iconLabel = new JLabel(new ImageIcon(
          new ImageIcon("image/person.png")
@@ -159,7 +160,7 @@ public class ViewPending {
 
       JPanel detailsPanel = new JPanel();
       detailsPanel.setLayout(new GridLayout(2, 1));
-      detailsPanel.setBackground(new Color(0xf9f7f0));
+      detailsPanel.setBackground(color);
 
       JLabel nameLabel = new JLabel("<html>Student Name: <span style='color:#636261;'>" + studentName + "</span></html>");
       nameLabel.setFont(new Font("Poppins", Font.BOLD, 15));
@@ -181,7 +182,7 @@ public class ViewPending {
 
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-      buttonPanel.setBackground(new Color(0xf9f7f0));
+      buttonPanel.setBackground(color);
       buttonPanel.setPreferredSize(new Dimension(100, 100));
 
       JButton rejectButton = new JButton("Reject");
@@ -189,7 +190,7 @@ public class ViewPending {
       rejectButton.setPreferredSize(new Dimension(100, 45));
       rejectButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       rejectButton.setFont(new Font("Poppins", Font.BOLD, 14));
-      rejectButton.setBackground(new Color(0xfce1c5));
+      rejectButton.setBackground(color);
       rejectButton.addActionListener(e -> {
          rejectsBooking.rejectBooking(filePath, bookingID);
          JOptionPane.showMessageDialog(frame, "Booking has been rejected", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -201,7 +202,7 @@ public class ViewPending {
       acceptButton.setPreferredSize(new Dimension(100, 45));
       acceptButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       acceptButton.setFont(new Font("Poppins", Font.BOLD, 14));
-      acceptButton.setBackground(new Color(0xfce1c5));
+      acceptButton.setBackground(color);
       acceptButton.addActionListener(e -> {
          acceptBooking.acceptBooking(filePath, bookingID);
          JOptionPane.showMessageDialog(frame, "Booking has been accepted", "Success", JOptionPane.INFORMATION_MESSAGE);

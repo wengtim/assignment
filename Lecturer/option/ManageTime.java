@@ -13,6 +13,7 @@ public class ManageTime {
 
    private boolean isHovered = false;
    private boolean hasSlots = false;
+   Color color = new Color(0xB3EBF2);
 
    String filePath = "data/booking/availability.txt";
    JFrame frame = new JFrame("Manage Time Slots");
@@ -34,7 +35,7 @@ public class ManageTime {
       frame.setSize(985, 555);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       loggedInfo.setBounds(10, 500, 233, 21);
       loggedInfo.setFont(font);
@@ -82,7 +83,7 @@ public class ManageTime {
       mainPanel.setBounds(100, 50, 800, 430);
 
       contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-      contentPanel.setBackground(new Color(0xf9f7f0));
+      contentPanel.setBackground(color);
 
       try {
          BufferedReader reader = new BufferedReader(new FileReader(filePath));
@@ -132,7 +133,7 @@ public class ManageTime {
       panel.setPreferredSize(new Dimension(750, 100));
       panel.setMaximumSize(new Dimension(750, 100));
       panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-      panel.setBackground(new Color(0xf9f7f0));
+      panel.setBackground(color);
 
       JLabel iconLabel = new JLabel(new ImageIcon(
          new ImageIcon("image/person.png")
@@ -144,7 +145,7 @@ public class ManageTime {
 
       JPanel detailsPanel = new JPanel();
       detailsPanel.setLayout(new GridLayout(2, 1));
-      detailsPanel.setBackground(new Color(0xf9f7f0));
+      detailsPanel.setBackground(color);
 
       JLabel lecturerName = new JLabel("<html>Lecturer Name: <span style='color:#636261;'>" + lecName + "</span></html>");
       lecturerName.setFont(new Font("Poppins", Font.BOLD, 15));
@@ -170,7 +171,7 @@ public class ManageTime {
 
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-      buttonPanel.setBackground(new Color(0xf9f7f0));
+      buttonPanel.setBackground(color);
       buttonPanel.setPreferredSize(new Dimension(100, 100));
 
       JButton editButton = new JButton("Edit");
@@ -179,7 +180,7 @@ public class ManageTime {
       editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       editButton.setPreferredSize(new Dimension(100, 45));
       editButton.setFont(new Font("Poppins", Font.BOLD, 14));
-      editButton.setBackground(new Color(0xfce1c5));
+      editButton.setBackground(color);
       editButton.addActionListener(e -> {
          frame.dispose();
          EditTime editTime = new EditTime(lecID, day, date, startTime, endTime, lecName, loginInfoOriginal);
@@ -191,7 +192,7 @@ public class ManageTime {
       addButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
       addButton.setPreferredSize(new Dimension(100, 45));
       addButton.setFont(new Font("Poppins", Font.BOLD, 14));
-      addButton.setBackground(new Color(0xfce1c5));
+      addButton.setBackground(color);
       addButton.addActionListener(e -> {
          frame.dispose();
          AddTime addTime = new AddTime(lecID, day, date, startTime, endTime, lecName, loginInfoOriginal);

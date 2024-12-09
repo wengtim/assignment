@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 public class LectureLogin implements ActionListener {
 
-   Color color = new Color(0xf9f7f0);
+   Color color = new Color(0xB3EBF2);
 
    JFrame frame = new JFrame("Lecture Login");
    JButton loginButton = new JButton("Login");

@@ -19,6 +19,7 @@ public class History {
    private boolean isHovered = false;
    private boolean hasBooking = false;
 
+   Color color = new Color(0xB3EBF2);
    JFrame frame = new JFrame("History");
    JLabel loggedInfo = new JLabel();
    Font font = new Font("JetBrains Mono", Font.PLAIN, 13);
@@ -38,7 +39,7 @@ public class History {
       frame.setSize(985, 555);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       loggedInfo.setBounds(10, 500, 233, 21);
       loggedInfo.setFont(font);
@@ -85,7 +86,7 @@ public class History {
       mainPanel.setBounds(100, 50, 800, 430);
 
       contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-      contentPanel.setBackground(new Color(0xf9f7f0));
+      contentPanel.setBackground(color);
 
       try (BufferedReader reader = new BufferedReader(new FileReader("data/booking/accepted/accepted.txt"))) {
          String line;
@@ -170,7 +171,7 @@ public class History {
       panel.setPreferredSize(new Dimension(750, 100));
       panel.setMaximumSize(new Dimension(750, 100));
       panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-      panel.setBackground(new Color(0xf9f7f0));
+      panel.setBackground(color);
 
       JLabel iconLabel = new JLabel(new ImageIcon(
          new ImageIcon("image/person.png")
@@ -182,7 +183,7 @@ public class History {
 
       JPanel detailsPanel = new JPanel();
       detailsPanel.setLayout(new GridLayout(2, 1));
-      detailsPanel.setBackground(new Color(0xf9f7f0));
+      detailsPanel.setBackground(color);
 
       JLabel lecLabel = new JLabel("<html>Student Name: <span style='color:#636261;'>" + studentName + "</span></html>");
       lecLabel.setFont(new Font("Poppins", Font.BOLD, 15));

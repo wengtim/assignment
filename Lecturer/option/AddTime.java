@@ -19,6 +19,7 @@ public class AddTime implements ActionListener {
 
    private boolean isHovered = false;
 
+   Color color = new Color(0xB3EBF2);
    JFrame frame = new JFrame("Add Time Slots");
    ReadFile readFile = new ReadFile();
    Font font = new Font("JetBrains Mono", Font.PLAIN, 13);
@@ -39,7 +40,7 @@ public class AddTime implements ActionListener {
       frame.setSize(500, 400);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       JPanel backPanel = new JPanel() {
          @Override
@@ -84,7 +85,7 @@ public class AddTime implements ActionListener {
       datePicker = new DatePicker();
       datePicker.getComponentDateTextField().setFont(font);
       datePicker.setOpaque(false);
-      datePicker.setBackground(new Color(0xf9f7f0));
+      datePicker.setBackground(color);
       datePicker.setFocusable(false);
       datePicker.setBounds(210, 73, 230, 30);
 
@@ -95,7 +96,7 @@ public class AddTime implements ActionListener {
 
       startTimePicker = new TimePicker();
       startTimePicker.setOpaque(false);
-      startTimePicker.setBackground(new Color(0xf9f7f0));
+      startTimePicker.setBackground(color);
       startTimePicker.getComponentTimeTextField().setFont(font);
       startTimePicker.setFocusable(false);
       startTimePicker.setBounds(210, 143, 225, 30);
@@ -106,7 +107,7 @@ public class AddTime implements ActionListener {
 
       endTimePicker = new TimePicker();
       endTimePicker.setOpaque(false);
-      endTimePicker.setBackground(new Color(0xf9f7f0));
+      endTimePicker.setBackground(color);
       endTimePicker.getComponentTimeTextField().setFont(font);
       endTimePicker.setFocusable(false);
       endTimePicker.setBounds(210, 203, 225, 30);

@@ -8,12 +8,12 @@ import java.awt.event.*;
 import java.time.*;
 import java.time.format.*;
 import Students.*;
-import Handler.CheckBooking;
 
 public class Feedback {
 
    private boolean isHovered = false;
 
+   Color color = new Color(0xB3EBF2);
    String studentName;
    String userID;
    HashMap<String, String> loginInfoOriginal;
@@ -31,7 +31,7 @@ public class Feedback {
       frame.setSize(985, 555);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(color);
 
       loggedInfo.setBounds(10, 500, 233, 21);
       loggedInfo.setFont(font);
@@ -79,7 +79,7 @@ public class Feedback {
 
       JPanel contentPanel = new JPanel();
       contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-      contentPanel.setBackground(new Color(0xf9f7f0));
+      contentPanel.setBackground(color);
 
       showCompletedBookings(contentPanel);
 
@@ -135,7 +135,7 @@ public class Feedback {
       panel.setPreferredSize(new Dimension(750, 100));
       panel.setMaximumSize(new Dimension(750, 100));
       panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-      panel.setBackground(new Color(0xf9f7f0));
+      panel.setBackground(color);
 
       JLabel iconLabel = new JLabel(new ImageIcon(
          new ImageIcon("image/person.png")
@@ -147,7 +147,7 @@ public class Feedback {
 
       JPanel detailsPanel = new JPanel();
       detailsPanel.setLayout(new GridLayout(2, 1));
-      detailsPanel.setBackground(new Color(0xf9f7f0));
+      detailsPanel.setBackground(color);
 
       JLabel lecturerName = new JLabel("<html>Lecturer Name: <span style='color:#636261;'>" + lecName + "</span></html>");
       lecturerName.setFont(new Font("Poppins", Font.BOLD, 17));
@@ -173,7 +173,7 @@ public class Feedback {
 
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-      buttonPanel.setBackground(new Color(0xf9f7f0));
+      buttonPanel.setBackground(color);
 
       JButton submitFeedback = new JButton("Submit Feedback");
       submitFeedback.setFocusable(false);
@@ -210,7 +210,7 @@ public class Feedback {
 
          JDialog feedbackDialog = new JDialog(frame, "Details", true);
          feedbackDialog.setSize(400, 300);
-         feedbackDialog.setBackground(new Color(0xf9f7f0));
+         feedbackDialog.setBackground(color);
          feedbackDialog.setLayout(new BorderLayout());
          feedbackDialog.setLocationRelativeTo(frame);
 

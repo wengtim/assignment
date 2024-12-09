@@ -11,7 +11,8 @@ public class LecturerPage {
 
    private boolean isHovered = false;
 
-   Color color = new Color(0xf9f7f0);
+   Color color = new Color(0xB3EBF2);
+   //Color color = new Color(0xf9f7f0);
    Font font = new Font(null, Font.PLAIN, 13);
 
    JFrame frame = new JFrame("Home (Lecturer)");

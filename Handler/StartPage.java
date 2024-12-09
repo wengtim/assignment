@@ -7,6 +7,9 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class StartPage implements ActionListener {
+   Color mainColor = new Color(0xB3EBF2);
+   Font font = new Font("Times New Roman", Font.BOLD, 20);
+
    JFrame frame = new JFrame("Student / Lecturer");
    JLabel label = new JLabel("Please select your role");
    JButton studentButton = new JButton("Student");
@@ -18,16 +21,16 @@ public class StartPage implements ActionListener {
       frame.setSize(400, 400);
       frame.setResizable(false);
       frame.setLayout(null);
-      frame.getContentPane().setBackground(new Color(0xf9f7f0));
+      frame.getContentPane().setBackground(mainColor);
 
       label.setBounds(50, 50, 300, 30);
-      label.setFont(new Font(null, Font.BOLD, 20));
+      label.setFont(font);
 
-      studentButton.setBounds(50, 100, 300, 42);
+      studentButton.setBounds(50, 120, 300, 42);
       studentButton.setFocusable(false);
       studentButton.addActionListener(this);
 
-      lecturerButton.setBounds(50, 150, 300, 42);
+      lecturerButton.setBounds(50, 180, 300, 42);
       lecturerButton.setFocusable(false);
       lecturerButton.addActionListener(this);
 

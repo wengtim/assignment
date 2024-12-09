@@ -275,11 +275,7 @@ public class SchedulePage {
                   cancelButton.setBackground(new Color(0xfce1c5));
                   cancelButton.addActionListener(e -> {
                      cancelBooking(bookingID);
-                     contentPanel.removeAll();
-                     showPendingBookings(contentPanel, scrollPane);
-                     scrollPane.setViewportView(contentPanel);
-                     scrollPane.revalidate();
-                     scrollPane.repaint();
+                     refreshPanel(contentPanel, scrollPane);
                   });
 
                   buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -419,4 +415,66 @@ public class SchedulePage {
       }
    }
 
+   private void refreshPanel(JPanel contentPanel, JScrollPane scrollPane) {
+      contentPanel.removeAll();
+      contentPanel.revalidate();
+      contentPanel.repaint();
+
+      showPendingBookings(contentPanel, scrollPane);
+
+      try {
+         BufferedReader reader = new BufferedReader(new FileReader("data/booking/accepted/accepted.txt"));
+         String line;
+         while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length >= 7) {
+               String bookingID = data[0];
+               String studentID = data[1];
+               String lecID = data[2];
+               String day = data[3];
+               String date = data[4];
+               String startTime = data[5];
+               String endTime = data[6];
+               String status = "Accepted";
+
+               if (studentID.equals(userID)) {
+                  JPanel schedulePanel = createSchedulePanel(bookingID, studentID, lecID, day, date, startTime, endTime, status);
+                  contentPanel.add(schedulePanel);
+               }
+            }
+         }
+         reader.close();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      try {
+         BufferedReader reader = new BufferedReader(new FileReader("data/booking/rejected/rejected.txt"));
+         String line;
+         while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length >= 7) {
+               String bookingID = data[0];
+               String studentID = data[1];
+               String lecID = data[2];
+               String day = data[3];
+               String date = data[4];
+               String startTime = data[5];
+               String endTime = data[6];
+               String status = "Rejected";
+
+               if (studentID.equals(userID)) {
+                  JPanel schedulePanel = createSchedulePanel(bookingID, studentID, lecID, day, date, startTime, endTime, status);
+                  contentPanel.add(schedulePanel);
+               }
+            }
+         }
+         reader.close();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      contentPanel.revalidate();
+      contentPanel.repaint();
+   }
 }

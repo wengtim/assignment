@@ -146,7 +146,6 @@ public class ConsultationPage implements ActionListener {
       bookButton.setBackground(new Color(0xfce1c5));
       bookButton.addActionListener(e -> {
          frame.dispose();
-         System.out.println("Selected: " + lecName);
          new Booking(lecName, lecID,  userID,  loginInfoOriginal);
       });
       panel.add(bookButton, BorderLayout.EAST);

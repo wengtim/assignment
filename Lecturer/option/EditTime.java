@@ -31,7 +31,7 @@ public class EditTime {
 
    public EditTime(String lecID, String day, String date, String startTime, String endTime, String lecName, HashMap<String, String>loginInfoOriginal) {
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      frame.setSize(985, 555);
+      frame.setSize(500, 400);
       frame.setResizable(false);
       frame.setLayout(null);
       frame.getContentPane().setBackground(new Color(0xf9f7f0));
@@ -72,31 +72,31 @@ public class EditTime {
          }
       });
 
-      dateLabel.setBounds(160, 15, 100, 100);
+      dateLabel.setBounds(90, 70, 100, 30);
       dateLabel.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
-      dateField.setBounds(270, 15, 200, 30);
+      dateField.setBounds(210, 70, 200, 30);
       dateField.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
       dateField.setText(date);
 
-      dayLabel.setBounds(160, 100, 100, 100);
+      dayLabel.setBounds(90, 120, 100, 30);
       dayLabel.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
-      dayField.setBounds(270, 100, 200, 30);
+      dayField.setBounds(210, 120, 200, 30);
       dayField.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
       dayField.setText(day);
 
-      startTimeLabel.setBounds(160, 185, 200, 100);
+      startTimeLabel.setBounds(90, 170, 200, 30);
       startTimeLabel.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
-      startTimeField.setBounds(270, 185, 200, 30);
+      startTimeField.setBounds(210, 170, 200, 30);
       startTimeField.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
       startTimeField.setText(startTime);
 
-      endTimeLabel.setBounds(160, 270, 200, 100);
+      endTimeLabel.setBounds(90, 220, 200, 30);
       endTimeLabel.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
-      endTimeField.setBounds(270, 270, 200, 30);
+      endTimeField.setBounds(210, 220, 200, 30);
       endTimeField.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
       endTimeField.setText(endTime);
 
-      saveButton.setBounds(270, 365, 100, 40);
+      saveButton.setBounds(200, 280, 100, 40);
       saveButton.setFont(new Font("JetBrains Mono", Font.PLAIN, 20));
       saveButton.setText("Save");
       saveButton.addActionListener(new ActionListener() {

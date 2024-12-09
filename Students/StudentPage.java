@@ -1,5 +1,7 @@
 package Students;
 
+import Students.FeedBack.Feedback;
+import Students.History.History;
 import Students.Consultation.ConsultationPage;
 import Students.Schedule.SchedulePage;
 import java.awt.*;
@@ -21,10 +23,11 @@ public class StudentPage implements ActionListener {
    JFrame frame = new JFrame("Home (Student)");
    JLabel loggedInfo = new JLabel();
    JLabel message = new JLabel();
+   String lecID;
 
    HashMap<String, String> loginInfoOriginal;
 
-   public StudentPage(String name, String userID,  HashMap<String, String> loginInfoOriginal) {
+   public StudentPage(String studentName, String userID,  HashMap<String, String> loginInfoOriginal) {
       this.loginInfoOriginal = loginInfoOriginal;
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,7 +116,7 @@ public class StudentPage implements ActionListener {
          @Override
          public void mouseClicked(MouseEvent e) {
             frame.dispose();
-            ConsultationPage consultationPage = new ConsultationPage(name, userID,  loginInfoOriginal);
+            ConsultationPage consultationPage = new ConsultationPage(studentName, userID,  loginInfoOriginal);
          }
 
          public void mouseEntered(MouseEvent e) {
@@ -157,7 +160,8 @@ public class StudentPage implements ActionListener {
       historyPanel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            System.out.println("History...");
+            frame.dispose();
+            History history = new History(userID, loginInfoOriginal);
          }
 
          public void mouseEntered(MouseEvent e) {
@@ -202,7 +206,7 @@ public class StudentPage implements ActionListener {
          @Override
          public void mouseClicked(MouseEvent e) {
             frame.dispose();
-            SchedulePage schedulePage = new SchedulePage(name, userID, loginInfoOriginal);
+            SchedulePage schedulePage = new SchedulePage(studentName, userID, loginInfoOriginal);
          }
 
          public void mouseEntered(MouseEvent e) {
@@ -246,7 +250,8 @@ public class StudentPage implements ActionListener {
       feedBackPanel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            System.out.println("FeedBack...");
+            frame.dispose();
+            Feedback feedback = new Feedback(studentName, userID, loginInfoOriginal);
          }
 
          public void mouseEntered(MouseEvent e) {

@@ -195,7 +195,8 @@ public class LecturerPage {
       historyPanel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            System.out.println("History...");
+            frame.dispose();
+            History history = new History(name, lecID, loginInfoOriginal);
          }
 
          public void mouseEntered(MouseEvent e) {
@@ -239,7 +240,8 @@ public class LecturerPage {
       feedBackPanel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            System.out.println("FeedBack...");
+            frame.dispose();
+            Feedback feedback = new Feedback(name, lecID, loginInfoOriginal);
          }
 
          public void mouseEntered(MouseEvent e) {

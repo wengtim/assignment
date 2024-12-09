@@ -6,11 +6,16 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 public class SchedulePage {
+
    private boolean isHovered = false;
+   private boolean hasBooking = false;
 
    String userID;
+   String studentName;
+
    HashMap<String, String> loginInfoOriginal;
    Font font = new Font(null, Font.PLAIN, 13);
 
@@ -20,9 +25,10 @@ public class SchedulePage {
    JFrame frame = new JFrame("Schedule");
    JLabel loggedInfo = new JLabel();
 
-   public SchedulePage(String name, String userID, HashMap<String, String> loginInfoOriginal) {
+   public SchedulePage(String studentName, String userID, HashMap<String, String> loginInfoOriginal) {
       this.userID = userID;
       this.loginInfoOriginal = loginInfoOriginal;
+      this.studentName = studentName;
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(985, 555);
@@ -54,7 +60,7 @@ public class SchedulePage {
          @Override
          public void mouseClicked(MouseEvent e) {
             frame.dispose();
-            new StudentPage(name, userID, loginInfoOriginal);
+            new StudentPage(studentName, userID, loginInfoOriginal);
          }
 
          @Override
@@ -87,13 +93,14 @@ public class SchedulePage {
                String bookingID = data[0];
                String studentID = data[1];
                String lecID = data[2];
+               String day = data[3];
                String date = data[4];
                String startTime = data[5];
                String endTime = data[6];
                String status = "Accepted";
 
                if (studentID.equals(userID)) {
-                  JPanel schedulePanel = createSchedulePanel(bookingID, studentID, lecID, date, startTime, endTime, status);
+                  JPanel schedulePanel = createSchedulePanel(bookingID, studentID, lecID, day, date, startTime, endTime, status);
                   contentPanel.add(schedulePanel);
                }
             }
@@ -112,13 +119,14 @@ public class SchedulePage {
                String bookingID = data[0];
                String studentID = data[1];
                String lecID = data[2];
+               String day = data[3];
                String date = data[4];
                String startTime = data[5];
                String endTime = data[6];
                String status = "Rejected";
 
                if (studentID.equals(userID)) {
-                  JPanel schedulePanel = createSchedulePanel(bookingID, studentID, lecID, date, startTime, endTime, status);
+                  JPanel schedulePanel = createSchedulePanel(bookingID, studentID, lecID, day, date, startTime, endTime, status);
                   contentPanel.add(schedulePanel);
                }
             }
@@ -128,10 +136,12 @@ public class SchedulePage {
          e.printStackTrace();
       }
 
-      showPendingBookings(contentPanel);
       JScrollPane scrollPane = new JScrollPane(contentPanel);
       scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
       scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+      showPendingBookings(contentPanel, scrollPane);
+
 
       mainPanel.add(scrollPane);
 
@@ -141,7 +151,7 @@ public class SchedulePage {
       frame.setVisible(true);
    }
 
-   private JPanel createSchedulePanel(String bookingID, String studentID, String lecID, String date, String startTime, String endTime, String status) {
+   private JPanel createSchedulePanel(String bookingID, String studentID, String lecID, String day, String date, String startTime, String endTime, String status) {
 
       String lecName = getLecName(lecID);
 
@@ -185,18 +195,28 @@ public class SchedulePage {
       rescheduleBut.setFont(new Font("Poppins", Font.BOLD, 14));
       rescheduleBut.setBackground(new Color(0xfce1c5));
       rescheduleBut.addActionListener(e -> {
+         rescheduleBooking(bookingID, userID, lecID, day, date);
       });
 
-      buttonPanel.add(rescheduleBut);
-      buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-      buttonPanel.add(Box.createVerticalGlue());
+      if (status.equals("Rejected") || status.equals("Pending")){
+         buttonPanel.add(rescheduleBut);
+         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+         buttonPanel.add(Box.createVerticalGlue());
 
-      panel.add(buttonPanel, BorderLayout.EAST);
+         panel.add(buttonPanel, BorderLayout.EAST);
+      } else {
+         JPanel emptyPanel = new JPanel();
+         emptyPanel.setLayout(new BoxLayout(emptyPanel, BoxLayout.Y_AXIS));
+         emptyPanel.setBackground(new Color(0xf9f7f0));
+         emptyPanel.setPreferredSize(new Dimension(100, 100));
+
+         panel.add(emptyPanel, BorderLayout.EAST);
+      }
 
       return panel;
    }
 
-   public void showPendingBookings(JPanel contentPanel) {
+   public void showPendingBookings(JPanel contentPanel, JScrollPane scrollPane) {
       try {
          BufferedReader reader = new BufferedReader(new FileReader("data/booking/pending/bookingDetails.txt"));
          String line;
@@ -254,21 +274,17 @@ public class SchedulePage {
                   cancelButton.setFont(new Font("Poppins", Font.BOLD, 14));
                   cancelButton.setBackground(new Color(0xfce1c5));
                   cancelButton.addActionListener(e -> {
+                     cancelBooking(bookingID);
+                     contentPanel.removeAll();
+                     showPendingBookings(contentPanel, scrollPane);
+                     scrollPane.setViewportView(contentPanel);
+                     scrollPane.revalidate();
+                     scrollPane.repaint();
                   });
 
-                  JButton rescheduleButton = new JButton("Reschedule");
-                  rescheduleButton.setFocusable(false);
-                  rescheduleButton.setPreferredSize(new Dimension(100, 45));
-                  rescheduleButton.setFont(new Font("Poppins", Font.BOLD, 14));
-                  rescheduleButton.setBackground(new Color(0xfce1c5));
-                  rescheduleButton.addActionListener(e -> {
-                  });
-
-                  //buttonPanel.add(Box.createVerticalGlue());
-                  //buttonPanel.add(rescheduleButton);
                   buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-                  buttonPanel.add(cancelButton);
                   buttonPanel.add(Box.createVerticalGlue());
+                  buttonPanel.add(cancelButton);
 
                   panel.add(buttonPanel, BorderLayout.EAST);
 
@@ -297,4 +313,110 @@ public class SchedulePage {
       }
       return null;
    }
+
+   private void cancelBooking(String bookingID) {
+      try {
+         File bookingFile = new File("data/booking/pending/bookingDetails.txt");
+         File availabilityFile = new File("data/booking/availability.txt");
+         List<String> allEntries = new ArrayList<>();
+         String canceledEntry = null;
+         String[] canceledData = null;
+
+         BufferedReader reader = new BufferedReader(new FileReader(bookingFile));
+         String line;
+         while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            if (!data[0].equals(bookingID)) {
+               allEntries.add(line);
+            } else {
+               canceledEntry = line;
+               canceledData = data;
+            }
+         }
+         reader.close();
+
+         BufferedWriter writer = new BufferedWriter(new FileWriter(bookingFile));
+         for (String entry : allEntries) {
+            writer.write(entry);
+            writer.newLine();
+         }
+         writer.close();
+
+         if (canceledEntry != null && canceledData != null) {
+            BufferedWriter availabilityWriter = new BufferedWriter(new FileWriter(availabilityFile, true));
+            availabilityWriter.write(canceledData[2] + "," + canceledData[3] + "," + canceledData[4] + "," + canceledData[5] + "," + canceledData[6]);
+            availabilityWriter.newLine();
+            availabilityWriter.close();
+         }
+
+         JOptionPane.showMessageDialog(frame, "Booking has been canceled", "Success", JOptionPane.INFORMATION_MESSAGE);
+      } catch (IOException ex) {
+         ex.printStackTrace();
+         JOptionPane.showMessageDialog(frame, "An error occurred while canceling the booking.", "Error", JOptionPane.ERROR_MESSAGE);
+      }
+   }
+
+   private void rescheduleBooking(String bookingID, String userID, String lecID, String day, String date) {
+      File rejectedFile = new File("data/booking/rejected/rejected.txt");
+      File tempRejectedFile = new File("data/booking/rejected/tempRejected.txt");
+      File pendingFile = new File("data/booking/pending/bookingDetails.txt");
+      File historyFile = new File("data/booking/history.txt");
+      File availabilityFile = new File("data/booking/availability.txt");
+      File tempAvailabilityFile = new File("data/booking/tempAvailability.txt");
+
+      try (BufferedReader rejectedReader = new BufferedReader(new FileReader(rejectedFile));
+      BufferedWriter tempRejectedWriter = new BufferedWriter(new FileWriter(tempRejectedFile));
+      BufferedWriter pendingWriter = new BufferedWriter(new FileWriter(pendingFile, true));
+      BufferedWriter historyWriter = new BufferedWriter(new FileWriter(historyFile, true));
+      BufferedReader availabilityReader = new BufferedReader(new FileReader(availabilityFile));
+      BufferedWriter tempAvailabilityWriter = new BufferedWriter(new FileWriter(tempAvailabilityFile))) {
+
+         String rejectedLine;
+         boolean bookingFound = false;
+
+         while ((rejectedLine = rejectedReader.readLine()) != null) {
+            String[] data = rejectedLine.split(",");
+
+            if (data[0].equals(bookingID) && data[1].equals(userID) && data[2].equals(lecID) && data[3].equals(day) && data[4].equals(date)) {
+               String rescheduledBooking = data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6] + "," + data[7];
+               pendingWriter.write(rescheduledBooking);
+               pendingWriter.newLine();
+
+               String insertRejected = data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6] + "," + "Rejected";
+               historyWriter.write(insertRejected);
+               historyWriter.newLine();
+               JOptionPane.showMessageDialog(frame, "Booking has been rescheduled", "Success", JOptionPane.INFORMATION_MESSAGE);
+               bookingFound = true;
+            } else {
+               tempRejectedWriter.write(rejectedLine);
+               tempRejectedWriter.newLine();
+            }
+         }
+
+         if (!bookingFound) {
+            System.out.println("Booking ID not found in rejected file.");
+            return;
+         }
+
+         String availabilityLine;
+         while ((availabilityLine = availabilityReader.readLine()) != null) {
+            String[] availabilityData = availabilityLine.split(",");
+            if (availabilityData[0].equals(lecID) && availabilityData[1].equals(day) && availabilityData[2].equals(date)) {
+               tempAvailabilityWriter.write(availabilityData[0] + "," + availabilityData[1] + "," + availabilityData[2] + "," + availabilityData[3] + "," + availabilityData[4]);
+               tempAvailabilityWriter.newLine();
+            }
+         }
+
+         if (!rejectedFile.delete() || !tempRejectedFile.renameTo(rejectedFile)) {
+            System.out.println("Error updating rejected file.");
+         }
+         if (!availabilityFile.delete() || !tempAvailabilityFile.renameTo(availabilityFile)) {
+            System.out.println("Error updating availability file.");
+         }
+
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+
 }

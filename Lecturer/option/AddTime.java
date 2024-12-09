@@ -111,7 +111,7 @@ public class AddTime implements ActionListener {
       endTimePicker.setFocusable(false);
       endTimePicker.setBounds(210, 203, 225, 30);
 
-      JButton submitButton = new JButton("Submit");
+      JButton submitButton = new JButton("Add Time");
       submitButton.setBounds(200, 270, 150, 50);
       submitButton.setFont(font);
       submitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

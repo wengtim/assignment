@@ -1,0 +1,5 @@
+1,wengtim,raul,Thursday,2024-12-03,07:00,09:00,Rejected
+2,wengtim,raul,Tuesday,2024-12-03,07:00,09:00,Rejected
+1,wengtim,raul,Tuesday,2024-12-03,07:00,09:00,Accepted
+1,wengtim,raul,Tuesday,2024-12-03,07:00,09:00,Accepted
+1,wengtim,raul,Tuesday,2024-12-03,07:00,09:00,Accepted

@@ -114,7 +114,7 @@ public class StudentLogin implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       String username = userIDField.getText();
       String password = String.valueOf(userPasswordField.getPassword());
-      String name = readFile(username);
+      String studentName = readFile(username);
 
       if (e.getSource() == backButton) {
          userIDField.setText("");
@@ -139,7 +139,7 @@ public class StudentLogin implements ActionListener {
          if (studentInfo.get(username).equals(password)) {
             messageLabel.setForeground(Color.green);
             frame.dispose();
-            StudentPage studentPage = new StudentPage(name, username,  studentInfo);
+            StudentPage studentPage = new StudentPage(studentName, username,  studentInfo);
          } else {
             messageLabel.setForeground(Color.red);
             messageLabel.setText("Invalid Password");

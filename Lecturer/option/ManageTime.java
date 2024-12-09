@@ -204,8 +204,6 @@ public class ManageTime {
       }
       addButton.setBounds(810, 10, 90, 35);
 
-      //buttonPanel.add(editButton);
-      //panel.add(buttonPanel, BorderLayout.EAST);
       panel.add(editButton, BorderLayout.EAST);
       frame.add(addButton);
 

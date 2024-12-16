@@ -1,12 +1,16 @@
 package Students.Schedule;
 
 import Students.*;
+import Students.Consultation.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import com.github.lgooddatepicker.components.*;
 
 public class SchedulePage {
 
@@ -25,6 +29,11 @@ public class SchedulePage {
 
    JFrame frame = new JFrame("Schedule");
    JLabel loggedInfo = new JLabel();
+   JPanel contentPanel = new JPanel();
+   JScrollPane scrollPane = new JScrollPane(contentPanel);
+   DatePicker datePicker = new DatePicker();
+   TimePicker startTimePicker = new TimePicker();
+   TimePicker endTimePicker = new TimePicker();
 
    public SchedulePage(String studentName, String userID, HashMap<String, String> loginInfoOriginal) {
       this.userID = userID;
@@ -81,7 +90,6 @@ public class SchedulePage {
       mainPanel.setLayout(new BorderLayout());
       mainPanel.setBounds(100, 50, 800, 430);
 
-      JPanel contentPanel = new JPanel();
       contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
       contentPanel.setBackground(color);
 
@@ -137,7 +145,6 @@ public class SchedulePage {
          e.printStackTrace();
       }
 
-      JScrollPane scrollPane = new JScrollPane(contentPanel);
       scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
       scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -196,7 +203,9 @@ public class SchedulePage {
       rescheduleBut.setFont(new Font("Poppins", Font.BOLD, 14));
       rescheduleBut.setBackground(color);
       rescheduleBut.addActionListener(e -> {
-         rescheduleBooking(bookingID, userID, lecID, day, date);
+         frame.dispose();
+         new Booking(lecName, lecID, userID, loginInfoOriginal);
+         removeRejected(lecID, userID, day, date, startTime, endTime);
       });
 
       if (status.equals("Rejected") || status.equals("Pending")){
@@ -215,6 +224,31 @@ public class SchedulePage {
       }
 
       return panel;
+   }
+
+   private void removeRejected(String lecID, String studentID, String day, String date, String startTime, String endTime) {
+      File filePath = new File("data/booking/rejected/rejected.txt");
+      File tempFile = new File("data/booking/rejected/tempRejected.txt");
+
+      try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+         String line;
+         while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length >= 7 && data[1].equals(studentID) && data[2].equals(lecID) && data[3].equals(day) && data[4].equals(date) && data[5].equals(startTime) && data[6].equals(endTime)) {
+               continue;
+            }
+            writer.write(line);
+            writer.newLine();
+         }
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      if (filePath.delete()) {
+         tempFile.renameTo(filePath);
+      }
    }
 
    public void showPendingBookings(JPanel contentPanel, JScrollPane scrollPane) {
@@ -350,69 +384,6 @@ public class SchedulePage {
       } catch (IOException ex) {
          ex.printStackTrace();
          JOptionPane.showMessageDialog(frame, "An error occurred while canceling the booking.", "Error", JOptionPane.ERROR_MESSAGE);
-      }
-   }
-
-   private void rescheduleBooking(String bookingID, String userID, String lecID, String day, String date) {
-      File rejectedFile = new File("data/booking/rejected/rejected.txt");
-      File tempRejectedFile = new File("data/booking/rejected/tempRejected.txt");
-      File pendingFile = new File("data/booking/pending/bookingDetails.txt");
-      File historyFile = new File("data/booking/history.txt");
-      File availabilityFile = new File("data/booking/availability.txt");
-      File tempAvailabilityFile = new File("data/booking/tempAvailability.txt");
-
-      try (BufferedReader rejectedReader = new BufferedReader(new FileReader(rejectedFile));
-      BufferedWriter tempRejectedWriter = new BufferedWriter(new FileWriter(tempRejectedFile));
-      BufferedWriter pendingWriter = new BufferedWriter(new FileWriter(pendingFile, true));
-      BufferedWriter historyWriter = new BufferedWriter(new FileWriter(historyFile, true));
-      BufferedReader availabilityReader = new BufferedReader(new FileReader(availabilityFile));
-      BufferedWriter tempAvailabilityWriter = new BufferedWriter(new FileWriter(tempAvailabilityFile))) {
-
-         String rejectedLine;
-         boolean bookingFound = false;
-
-         while ((rejectedLine = rejectedReader.readLine()) != null) {
-            String[] data = rejectedLine.split(",");
-
-            if (data[0].equals(bookingID) && data[1].equals(userID) && data[2].equals(lecID) && data[3].equals(day) && data[4].equals(date)) {
-               String rescheduledBooking = data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6] + "," + data[7];
-               pendingWriter.write(rescheduledBooking);
-               pendingWriter.newLine();
-
-               String insertRejected = data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6] + "," + "Rejected";
-               historyWriter.write(insertRejected);
-               historyWriter.newLine();
-               JOptionPane.showMessageDialog(frame, "Booking has been rescheduled", "Success", JOptionPane.INFORMATION_MESSAGE);
-               bookingFound = true;
-            } else {
-               tempRejectedWriter.write(rejectedLine);
-               tempRejectedWriter.newLine();
-            }
-         }
-
-         if (!bookingFound) {
-            System.out.println("Booking ID not found in rejected file.");
-            return;
-         }
-
-         String availabilityLine;
-         while ((availabilityLine = availabilityReader.readLine()) != null) {
-            String[] availabilityData = availabilityLine.split(",");
-            if (availabilityData[0].equals(lecID) && availabilityData[1].equals(day) && availabilityData[2].equals(date)) {
-               tempAvailabilityWriter.write(availabilityData[0] + "," + availabilityData[1] + "," + availabilityData[2] + "," + availabilityData[3] + "," + availabilityData[4]);
-               tempAvailabilityWriter.newLine();
-            }
-         }
-
-         if (!rejectedFile.delete() || !tempRejectedFile.renameTo(rejectedFile)) {
-            System.out.println("Error updating rejected file.");
-         }
-         if (!availabilityFile.delete() || !tempAvailabilityFile.renameTo(availabilityFile)) {
-            System.out.println("Error updating availability file.");
-         }
-
-      } catch (IOException e) {
-         e.printStackTrace();
       }
    }
 

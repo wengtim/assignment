@@ -103,7 +103,7 @@ public class ViewPending {
             }
          }
          if (!hasBookings) {
-            JLabel noBookingLabel = new JLabel("<html><h2>No Booking Pending</h2></html>");
+            JLabel noBookingLabel = new JLabel("<html><h2>No Bookings Pending</h2></html>");
             noBookingLabel.setFont(new Font("Poppins", Font.BOLD, 23));
             noBookingLabel.setHorizontalAlignment(SwingConstants.CENTER);
             contentPanel.add(noBookingLabel);

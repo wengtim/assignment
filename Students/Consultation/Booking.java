@@ -112,10 +112,16 @@ public class Booking {
       }
 
       if (!hasBooking) {
-         JLabel noAvailableTimeLabel = new JLabel("No Available Time");
-         noAvailableTimeLabel.setFont(new Font("Poppins", Font.BOLD, 23));
-         noAvailableTimeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-         contentPanel.add(noAvailableTimeLabel);
+         JLabel noAvailabilityLabel = new JLabel("<html><h2>No Available Time</h2></html>");
+         noAvailabilityLabel.setFont(new Font("Poppins", Font.BOLD, 23));
+         noAvailabilityLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+         JLabel contactLabel = new JLabel("<html><h2>Please contact your lecturer</h2></html>");
+         contactLabel.setFont(new Font("Poppins", Font.BOLD, 23));
+         contactLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+         contentPanel.add(noAvailabilityLabel);
+         contentPanel.add(contactLabel);
       }
 
       JScrollPane scrollPane = new JScrollPane(contentPanel);

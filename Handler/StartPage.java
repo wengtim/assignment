@@ -12,6 +12,7 @@ public class StartPage implements ActionListener {
 
    JFrame frame = new JFrame("Student / Lecturer");
    JLabel label = new JLabel("Please select your role");
+   JLabel welcomeLabel = new JLabel("Welcome to APU Consultation");
    JButton studentButton = new JButton("Student");
    JButton lecturerButton = new JButton("Lecturer");
 
@@ -23,8 +24,13 @@ public class StartPage implements ActionListener {
       frame.setLayout(null);
       frame.getContentPane().setBackground(mainColor);
 
-      label.setBounds(50, 50, 300, 30);
+      label.setBounds(50, 60, 300, 30);
+      label.setHorizontalAlignment(SwingConstants.CENTER);
       label.setFont(font);
+
+      welcomeLabel.setBounds(50, 20, 300, 30);
+      welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+      welcomeLabel.setFont(font);
 
       studentButton.setBounds(50, 120, 300, 42);
       studentButton.setFocusable(false);
@@ -35,6 +41,7 @@ public class StartPage implements ActionListener {
       lecturerButton.addActionListener(this);
 
       frame.add(label);
+      frame.add(welcomeLabel);
       frame.add(studentButton);
       frame.add(lecturerButton);
       frame.setVisible(true);

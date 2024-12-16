@@ -36,6 +36,7 @@ public class RegisterPage implements ActionListener {
    JFrame frame = new JFrame("Register (Student)");
 
    JLabel nameLabel = new JLabel("Name: ");
+   JLabel registerLabel = new JLabel("Enter your details to register");
    JLabel usernameLabel = new JLabel("UserID: ");
    JLabel passwordLabel = new JLabel("Password: ");
    JButton registerButton = new JButton("Register");
@@ -51,6 +52,9 @@ public class RegisterPage implements ActionListener {
 
       messageLabel.setBounds(75, 255, 1000, 100);
       messageLabel.setFont(new Font(null, Font.BOLD, 15));
+
+      registerLabel.setBounds(105, 0, 1000, 100);
+      registerLabel.setFont(new Font(null, Font.BOLD, 15));
 
       nameLabel.setBounds(50, 100, 75, 25);
       nameField.setBounds(125, 100, 200, 25);
@@ -77,6 +81,7 @@ public class RegisterPage implements ActionListener {
       frame.setResizable(false);
       frame.getContentPane().setBackground(color);
 
+      frame.add(registerLabel);
       frame.add(nameLabel);
       frame.add(usernameLabel);
       frame.add(passwordLabel);

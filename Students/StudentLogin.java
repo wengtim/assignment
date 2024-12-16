@@ -28,6 +28,7 @@ public class StudentLogin implements ActionListener {
    JPasswordField userPasswordField = new JPasswordField();
    JLabel registerLabel = new JLabel();
    JLabel infoLabel = new JLabel();
+   JLabel credentialsLabel = new JLabel();
    JLabel userIDLabel = new JLabel("User ID");
    JLabel userPasswordLabel = new JLabel("Password");
    JLabel messageLabel = new JLabel();
@@ -38,6 +39,10 @@ public class StudentLogin implements ActionListener {
    public StudentLogin(HashMap<String, String> loginInfoOriginal) {
 
       studentInfo = loginInfoOriginal;
+
+      credentialsLabel.setBounds(105, 0, 1000, 100);
+      credentialsLabel.setFont(new Font(null, Font.BOLD, 15));
+      credentialsLabel.setText("Use your credentials to login");
 
       userIDLabel.setBounds(50, 100, 75, 25);
       userPasswordLabel.setBounds(50, 150, 75, 25);
@@ -59,7 +64,7 @@ public class StudentLogin implements ActionListener {
       backButton.setFocusable(false);
 
       infoLabel.setBounds(80, 310, 255, 50);
-      infoLabel.setText("Does not have an Account? ");
+      infoLabel.setText("Do not have an account? ");
       infoLabel.setFont(new Font(null, Font.PLAIN, 13));
 
       registerLabel.setBounds(255, 313, 83, 45);
@@ -84,6 +89,7 @@ public class StudentLogin implements ActionListener {
          }
       });
 
+      frame.add(credentialsLabel);
       frame.add(userIDField);
       frame.add(userPasswordField);
       frame.add(loginButton);

@@ -265,4 +265,45 @@ public class History {
          e.printStackTrace();
       }
    }
+
+   private void cleanUpHistory() {
+      List<String> validEntries = new ArrayList<>();
+      DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+      try (BufferedReader reader = new BufferedReader(new FileReader("data/booking/history.txt"))) {
+         String line;
+         while ((line = reader.readLine()) != null) {
+            try {
+               String[] data = line.split(",");
+               if (data.length == 8) {
+                  String date = data[4];
+                  String endTime = data[6];
+
+                  LocalDate bookingDate = LocalDate.parse(date, dateFormatter);
+                  LocalTime bookingEndTime = LocalTime.parse(endTime, timeFormatter);
+                  LocalDateTime bookingEndTimeLocal = LocalDateTime.of(bookingDate, bookingEndTime);
+
+                  if (LocalDateTime.now().isBefore(bookingEndTimeLocal)) {
+                     validEntries.add(line);
+                  }
+               }
+            } catch (Exception e) {
+               System.err.println("Error parsing entry: " + line + " - " + e.getMessage());
+            }
+         }
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/booking/history.txt"))) {
+         HashSet<String> uniqueEntries = new HashSet<>(validEntries);
+         for (String entry : uniqueEntries) {
+            writer.write(entry);
+            writer.newLine();
+         }
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
 }

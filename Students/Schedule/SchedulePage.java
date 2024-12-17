@@ -267,6 +267,17 @@ public class SchedulePage {
                String status = data[7];
 
                if (studentID.equals(userID)) {
+                  LocalDate bookingDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                  LocalTime bookingStartTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HH:mm"));
+
+                  LocalDate currentDate = LocalDate.now();
+                  LocalTime currentTime = LocalTime.now();
+
+                  if (bookingDate.isBefore(currentDate) || (bookingDate.isEqual(currentDate) && bookingStartTime.isBefore(currentTime))) {
+                     continue;
+                  }
+
+
                   String lecName = getLecName(lecID);
 
                   JPanel panel = new JPanel();

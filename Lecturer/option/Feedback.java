@@ -247,33 +247,35 @@ public class Feedback {
    }
 
    private String getUserFeedback(String bookingID) {
+      String latestFeedback = "";
       try (BufferedReader reader = new BufferedReader(new FileReader("data/feedback/feedback.txt"))) {
          String line;
          while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             if (data.length >= 9 && data[0].equals(bookingID)) {
-               return data[8];
+               latestFeedback = data[8];
             }
          }
       } catch (IOException e) {
          e.printStackTrace();
       }
-      return "";
+      return latestFeedback;
    }
 
    private String getLecturerFeedback(String bookingID) {
+      String latestFeedback = "";
       try (BufferedReader reader = new BufferedReader(new FileReader("data/feedback/lecFeedback.txt"))) {
          String line;
          while ((line = reader.readLine()) != null) {
             String[] data = line.split(";");
             if (data.length >= 9 && data[0].equals(bookingID)) {
-               return data[8];
+               latestFeedback = data[8];
             }
          }
       } catch (IOException e) {
          e.printStackTrace();
       }
-      return "";
+      return latestFeedback;
    }
 
    private void promptFeedback(String bookingID, String studentID, String lecID, String day, String date, String startTime, String endTime, String status) {

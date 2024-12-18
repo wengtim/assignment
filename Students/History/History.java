@@ -161,6 +161,7 @@ public class History {
       frame.add(loggedInfo);
       frame.add(backPanel);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    private JPanel showTimeDetails(String lecturerName, String day, String date, String startTime, String endTime, String status) {

@@ -93,6 +93,7 @@ public class Feedback {
       frame.add(backPanel);
       frame.add(loggedInfo);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    private void showCompletedBookings(JPanel contentPanel) {

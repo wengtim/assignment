@@ -45,6 +45,7 @@ public class StartPage implements ActionListener {
       frame.add(studentButton);
       frame.add(lecturerButton);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    public void paintComponent(Graphics g) {

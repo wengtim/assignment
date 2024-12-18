@@ -123,6 +123,7 @@ public class ViewPending {
       frame.add(loggedInfo);
 
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    private String getStudentName(String userID) {

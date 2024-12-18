@@ -111,6 +111,7 @@ public class ConsultationPage implements ActionListener {
       frame.add(backPanel);
       frame.add(loggedInfo);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    private JPanel createLecturerPanel(String lecName, String lecID, String status) {

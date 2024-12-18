@@ -164,5 +164,6 @@ public class EditTime {
       frame.add(endTimeField);
       frame.add(saveButton);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 }

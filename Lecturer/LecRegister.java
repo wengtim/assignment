@@ -87,6 +87,7 @@ public class LecRegister implements ActionListener {
       frame.add(messageLabel);
 
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    @Override

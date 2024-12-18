@@ -127,6 +127,7 @@ public class AddTime implements ActionListener {
       frame.add(submitButton);
       frame.add(backPanel);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    @Override

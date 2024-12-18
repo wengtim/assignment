@@ -157,6 +157,7 @@ public class SchedulePage {
       frame.add(backPanel);
       frame.add(loggedInfo);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    private JPanel createSchedulePanel(String bookingID, String studentID, String lecID, String day, String date, String startTime, String endTime, String status) {

@@ -125,6 +125,7 @@ public class ManageTime {
       frame.add(backPanel);
       frame.add(loggedInfo);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    private JPanel manageTimeSlots(String lecID, String day, String date, String startTime, String endTime, String lecName) {

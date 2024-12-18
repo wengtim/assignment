@@ -106,6 +106,7 @@ public class StudentLogin implements ActionListener {
       frame.setLayout(null);
       frame.getContentPane().setBackground(color);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
    public static void timesleep(int time) {

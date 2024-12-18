@@ -267,6 +267,7 @@ public class LecturerPage {
       frame.add(logoutPanel);
       frame.add(loggedInfo);
       frame.setVisible(true);
+      frame.setLocationRelativeTo(null);
    }
 
 }

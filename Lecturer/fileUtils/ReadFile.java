@@ -5,6 +5,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class ReadFile {
+
    public List<String> ViewPendingLecturer(String lecID, String filePath) {
       List<String> pendingDetails = new ArrayList<>();
       try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
